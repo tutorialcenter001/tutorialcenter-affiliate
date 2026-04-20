@@ -26,6 +26,9 @@ Route::middleware('guest')->group(function () {
     Route::get('/dashboard', function () {
         return view('dashboard');
     })->middleware('auth')->name('dashboard');
+
+    Route::get('/verify/{token}', [UserController::class, 'verifyAccount'])
+    ->name('verification.verify');
 });
 
 

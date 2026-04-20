@@ -1,117 +1,117 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f2f2f2;
-            color: #333;
-        }
-        .container {
-            max-width: 600px;
-            margin: 0 auto;
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .header {
-            background-color: #0b3a67;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            border-radius: 8px 8px 0 0;
-            margin: -20px -20px 20px -20px;
-        }
-        .header img {
-            max-width: 150px;
-            margin-bottom: 10px;
-        }
-        .content {
-            margin: 20px 0;
-        }
-        .button {
-            display: inline-block;
-            background-color: #ed1c24;
-            color: white;
-            padding: 12px 30px;
-            text-decoration: none;
-            border-radius: 6px;
-            margin: 20px 0;
-            font-weight: bold;
-        }
-        .button:hover {
-            background-color: #c41820;
-        }
-        .footer {
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
-            font-size: 12px;
-            color: #666;
-            text-align: center;
-        }
-        .welcome-box {
-            background-color: #f9f9f9;
-            border-left: 4px solid #0b3a67;
-            padding: 15px;
-            margin: 15px 0;
-        }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your TC Affiliate Account</title>
 </head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1 style="margin: 0; font-size: 28px;">Welcome to TC Affiliates</h1>
-        </div>
+<body style="margin: 0; padding: 0; background-color: #f2f2f2; font-family: Arial, Helvetica, sans-serif; color: #333333;">
+    <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f2f2f2; margin: 0; padding: 30px 15px;">
+        <tr>
+            <td align="center">
+                <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width: 600px; background-color: #ffffff; border-radius: 10px; overflow: hidden;">
+                    
+                    <tr>
+                        <td style="background-color: #0b3a67; padding: 30px 20px; text-align: center;">
+                            <h1 style="margin: 0; color: #ffffff; font-size: 28px; line-height: 1.3;">
+                                Welcome to TC Affiliates
+                            </h1>
+                        </td>
+                    </tr>
 
-        <div class="content">
-            <h2 style="color: #0b3a67;">Hello {{ $user->firstname }},</h2>
+                    <tr>
+                        <td style="padding: 30px 25px;">
+                            <h2 style="margin: 0 0 16px; color: #0b3a67; font-size: 22px;">
+                                Hello {{ $user->firstname }},
+                            </h2>
 
-            <p>Thank you for registering with TC Affiliates! We're excited to have you join our community.</p>
+                            <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.7; color: #333333;">
+                                Thank you for registering with TC Affiliates. We’re excited to have you join the platform.
+                            </p>
 
-            <div class="welcome-box">
-                <strong>Account Details:</strong><br>
-                Email: {{ $user->email }}<br>
-                Name: {{ $user->firstname }} {{ $user->surname }}<br>
-                Referral Code: {{ $user->referral_code }}
-            </div>
+                            <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background-color: #f9f9f9; border-left: 4px solid #0b3a67; margin: 20px 0;">
+                                <tr>
+                                    <td style="padding: 16px;">
+                                        <p style="margin: 0 0 8px; font-size: 14px; color: #333333;">
+                                            <strong>Account Details</strong>
+                                        </p>
+                                        <p style="margin: 0 0 6px; font-size: 14px; color: #333333;">
+                                            <strong>Name:</strong> {{ $user->firstname }} {{ $user->surname }}
+                                        </p>
+                                        <p style="margin: 0 0 6px; font-size: 14px; color: #333333;">
+                                            <strong>Email:</strong> {{ $user->email }}
+                                        </p>
+                                        <p style="margin: 0; font-size: 14px; color: #333333;">
+                                            <strong>Referral Code:</strong> {{ $user->referral_code }}
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
 
-            <p>To complete your registration and activate your account, please verify your email address by clicking the button below:</p>
+                            <p style="margin: 0 0 20px; font-size: 15px; line-height: 1.7; color: #333333;">
+                                To complete your registration and activate your affiliate account, please verify your email address by clicking the button below.
+                            </p>
 
-            <div style="text-align: center;">
-                <a href="{{ $verificationUrl }}" class="button">Verify Email Address</a>
-            </div>
+                            <table role="presentation" cellspacing="0" cellpadding="0" border="0" align="center" style="margin: 25px auto;">
+                                <tr>
+                                    <td align="center" bgcolor="#ed1c24" style="border-radius: 6px;">
+                                        <a href="{{ $verificationUrl }}"
+                                           style="display: inline-block; padding: 14px 28px; font-size: 15px; font-weight: bold; color: #ffffff; text-decoration: none; border-radius: 6px;">
+                                            Verify Email Address
+                                        </a>
+                                    </td>
+                                </tr>
+                            </table>
 
-            <p style="color: #666; font-size: 13px;">
-                If the button above doesn't work, copy and paste this link into your browser:<br>
-                <code style="background-color: #f0f0f0; padding: 2px 6px;">{{ $verificationUrl }}</code>
-            </p>
+                            <p style="margin: 0 0 10px; font-size: 13px; line-height: 1.7; color: #666666;">
+                                If the button above does not work, copy and paste this link into your browser:
+                            </p>
 
-            <p>This verification link will expire in 24 hours.</p>
+                            <p style="margin: 0 0 20px; font-size: 13px; line-height: 1.7; word-break: break-all; color: #666666; background-color: #f5f5f5; padding: 10px; border-radius: 6px;">
+                                {{ $verificationUrl }}
+                            </p>
 
-            <p>Once you've verified your email, you'll be able to:</p>
-            <ul>
-                <li>Access your affiliate dashboard</li>
-                <li>Create and manage your referral links</li>
-                <li>Track your earnings and referrals</li>
-                <li>Request withdrawals</li>
-            </ul>
+                            <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.7; color: #333333;">
+                                This verification link will expire in 24 hours.
+                            </p>
 
-            <p>If you didn't create this account, please ignore this email.</p>
+                            <p style="margin: 0 0 10px; font-size: 15px; line-height: 1.7; color: #333333;">
+                                Once your email is verified, you’ll be able to:
+                            </p>
 
-            <p>
-                Best regards,<br>
-                <strong>The TC Affiliates Team</strong><br>
-                <em>Empowering Minds. Achieving Excellence.</em>
-            </p>
-        </div>
+                            <ul style="margin: 0 0 20px 20px; padding: 0; color: #333333; font-size: 15px; line-height: 1.8;">
+                                <li>Access your affiliate dashboard</li>
+                                <li>Track your account growth</li>
+                                <li>Monitor your referral activity</li>
+                                <li>Manage your withdrawals</li>
+                            </ul>
 
-        <div class="footer">
-            <p>&copy; {{ now()->year }} TC Affiliates. All rights reserved.</p>
-            <p>This is an automated message, please do not reply directly to this email.</p>
-        </div>
-    </div>
+                            <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.7; color: #333333;">
+                                If you did not create this account, please ignore this email.
+                            </p>
+
+                            <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #333333;">
+                                Best regards,<br>
+                                <strong>The TC Affiliates Team</strong><br>
+                                <span style="color: #666666;">Empowering Minds. Achieving Excellence.</span>
+                            </p>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td style="padding: 20px 25px; border-top: 1px solid #eeeeee; text-align: center;">
+                            <p style="margin: 0 0 6px; font-size: 12px; color: #666666;">
+                                &copy; {{ now()->year }} TC Affiliates. All rights reserved.
+                            </p>
+                            <p style="margin: 0; font-size: 12px; color: #666666;">
+                                This is an automated message. Please do not reply directly to this email.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
 </body>
 </html>

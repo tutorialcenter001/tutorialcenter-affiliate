@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountVerification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\VerificationMail;
@@ -11,15 +12,13 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Validation\ValidationException;
 
 class UserController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
+    public function index(){
         try {
             $users = User::withTrashed()->paginate(15);
 
@@ -32,17 +31,22 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
-    {
+    public function store(Request $request){
+
         $validator = Validator::make($request->all(), [
             'firstname' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:users',
+            'email' => 'required|string|email|max:255|unique:users,email',
             'password' => 'required|string|min:8|confirmed',
-            'referral_code' => 'required|string|max:255|unique:users',
+            'referral_code' => 'required|string|max:255|unique:users,referral_code',
             'role' => 'required|string|in:affiliate,admin,user',
             'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'phone_number' => 'nullable|string|max:11|min:11|regex:/^[0-9]{11}$/',
+            'phone_number' => [
+                'nullable',
+                'string',
+                'size:11',
+                'regex:/^0(70|80|81|90|91)\d{8}$/',
+            ],
         ]);
 
         if ($validator->fails()) {
@@ -53,6 +57,7 @@ class UserController extends Controller
         }
 
         DB::beginTransaction();
+
         try {
             $user = new User();
             $user->firstname = $request->firstname;
@@ -68,13 +73,20 @@ class UserController extends Controller
             }
 
             $user->save();
-            Mail::send(new VerificationMail($user));
+
+            $verification = AccountVerification::create([
+                'user_id' => $user->id,
+                'token' => rand(100000, 999999),
+                'expires_at' => now()->addHours(24),
+            ]);
+
+            Mail::to($user->email)->send(new VerificationMail($user, $verification->token));
 
             DB::commit();
 
             return response()->json([
                 'message' => 'Account created successfully. Please check your email for verification.',
-                'user' => $user
+                'user' => $user,
             ], 201);
 
         } catch (\Exception $e) {
@@ -83,8 +95,34 @@ class UserController extends Controller
             return response()->json([
                 'error' => 'Failed to create user',
                 'message' => $e->getMessage(),
+                'trace_message' => config('app.debug') ? $e->getTraceAsString() : null,
             ], 500);
         }
+    }
+
+    // Account verification method
+    public function verifyAccount($token){
+        $verification = AccountVerification::where('token', $token)->first();
+
+        if (!$verification) {
+            return redirect()->route('login')->with('error', 'Invalid verification link.');
+        }
+
+        if ($verification->expires_at && now()->gt($verification->expires_at)) {
+            return redirect()->route('login')->with('error', 'Verification link expired.');
+        }
+
+        $user = $verification->user;
+
+        if ($user->email_verified_at) {
+            return redirect()->route('login')->with('success', 'Account already verified.');
+        }
+
+        $user->update([
+            'email_verified_at' => now(),
+        ]);
+
+        return redirect()->route('login')->with('success', 'Account verified successfully.');
     }
 
     /**

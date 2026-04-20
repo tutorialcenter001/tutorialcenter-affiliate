@@ -14,11 +14,20 @@ class VerificationMail extends Mailable implements ShouldQueue
 {
     use Queueable, SerializesModels;
 
+    public User $user;
+    public string $token;
+    public string $verificationUrl;
+
     /**
      * Create a new message instance.
      */
-    public function __construct(public User $user)
+    public function __construct(User $user, string $token)
     {
+        $this->user = $user;
+        $this->token = $token;
+        $this->verificationUrl = route('verification.verify', [
+            'token' => $this->token,
+        ]);
     }
 
     /**
@@ -40,11 +49,7 @@ class VerificationMail extends Mailable implements ShouldQueue
             view: 'emails.verification-mail',
             with: [
                 'user' => $this->user,
-                'verificationUrl' => \Illuminate\Support\Facades\URL::temporarySignedRoute(
-                    'verification.verify',
-                    now()->addHours(24),
-                    ['id' => $this->user->getKey(), 'hash' => sha1($this->user->getEmailForVerification())]
-                ),
+                'verificationUrl' => $this->verificationUrl,
             ],
         );
     }

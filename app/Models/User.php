@@ -52,4 +52,10 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+
+    // Relationship to AccountVerification
+    public function verification()
+    {
+        return $this->hasOne(AccountVerification::class);
+    }
 }
