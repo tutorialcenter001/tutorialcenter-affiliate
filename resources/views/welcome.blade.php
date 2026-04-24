@@ -3,91 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome | TC Affiliates</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/tc-icon.png') }}">
+    <title>TC Affiliates | Welcome</title>
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class'
+        }
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-[#f2f2f2] text-gray-800">
 
-    <div class="min-h-screen flex items-center justify-center px-4 py-10">
-        <div class="max-w-6xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden grid md:grid-cols-2 border border-gray-200">
+<body class="bg-[#f2f2f2] text-gray-800 dark:bg-slate-950 dark:text-slate-100">
 
-            <!-- Left Brand Panel -->
-            <div class="bg-[#0b3a67] text-white p-10 md:p-14 flex flex-col justify-center">
-                <div class="mb-6">
-                    <img src="{{ asset('images/tc-logo.png') }}" alt="TC Tutorial Center Logo" class="h-20 mb-6">
-                    <h1 class="text-4xl md:text-5xl font-extrabold leading-tight">
-                        Welcome to <span class="text-[#ed1c24]">TC Affiliates</span>
+    @include('components.header')
+
+    <main>
+
+        <!-- Hero -->
+        <section class="relative overflow-hidden bg-white dark:bg-slate-950">
+            <div class="absolute inset-0 bg-gradient-to-br from-[#0b3a67]/10 via-transparent to-[#ed1c24]/10 dark:from-[#0b3a67]/30 dark:to-[#ed1c24]/20"></div>
+
+            <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <p class="inline-flex rounded-full bg-[#0b3a67]/10 px-4 py-2 text-sm font-semibold text-[#0b3a67] dark:bg-white/10 dark:text-slate-200 mb-6">
+                        TC Affiliate Partner Platform
+                    </p>
+
+                    <h1 class="text-4xl md:text-6xl font-extrabold text-[#0b3a67] dark:text-white leading-tight">
+                        Earn with TC by sharing your referral code.
                     </h1>
-                </div>
 
-                <p class="text-lg text-gray-100 leading-relaxed mb-8">
-                    Join the TC affiliate community and start sharing your referral code with new learners.
-                    Help others discover Tutorial Center while growing your rewards.
-                </p>
-
-                <div class="space-y-4">
-                    <div class="flex items-start gap-3">
-                        <div class="w-3 h-3 mt-2 rounded-full bg-[#ed1c24]"></div>
-                        <p class="text-base text-gray-100">Get your unique affiliate referral code</p>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div class="w-3 h-3 mt-2 rounded-full bg-[#ed1c24]"></div>
-                        <p class="text-base text-gray-100">Invite new users to register through your code</p>
-                    </div>
-                    <div class="flex items-start gap-3">
-                        <div class="w-3 h-3 mt-2 rounded-full bg-[#ed1c24]"></div>
-                        <p class="text-base text-gray-100">Track referrals and grow with the TC brand</p>
-                    </div>
-                </div>
-
-                <div class="mt-10 pt-6 border-t border-white/20">
-                    <p class="text-sm uppercase tracking-widest text-gray-200">
-                        Empowering Minds. Achieving Excellence.
+                    <p class="mt-6 text-lg text-[#7a7a7a] dark:text-slate-300 leading-relaxed max-w-2xl">
+                        Join the TC affiliate platform, create your own referral code, track account growth,
+                        monitor earnings, and request withdrawals from one simple dashboard.
                     </p>
+
+                    <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                        @if (Route::has('register'))
+                            <a href="{{ route('register') }}"
+                               class="inline-flex justify-center rounded-xl bg-[#ed1c24] px-7 py-3.5 font-semibold text-white hover:opacity-90 transition">
+                                Become an Affiliate
+                            </a>
+                        @endif
+
+                        @if (Route::has('login'))
+                            <a href="{{ route('login') }}"
+                               class="inline-flex justify-center rounded-xl border-2 border-[#0b3a67] px-7 py-3.5 font-semibold text-[#0b3a67] hover:bg-[#0b3a67] hover:text-white dark:border-slate-500 dark:text-slate-100 dark:hover:bg-slate-800 transition">
+                                Login to Dashboard
+                            </a>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="rounded-3xl bg-[#0b3a67] dark:bg-slate-900 p-8 text-white shadow-2xl border border-white/10">
+                    <div class="bg-white/10 rounded-2xl p-6 mb-6">
+                        <p class="text-sm text-gray-200">Sample Referral Code</p>
+                        <h2 class="text-4xl font-extrabold text-[#ed1c24] mt-2">TC-JOHN25</h2>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl p-5">
+                            <p class="text-sm text-[#7a7a7a] dark:text-slate-400">Referrals</p>
+                            <h3 class="text-3xl font-bold text-[#0b3a67] dark:text-white">128</h3>
+                        </div>
+
+                        <div class="bg-white dark:bg-slate-800 rounded-2xl p-5">
+                            <p class="text-sm text-[#7a7a7a] dark:text-slate-400">Earnings</p>
+                            <h3 class="text-3xl font-bold text-[#0b3a67] dark:text-white">₦250k</h3>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 rounded-2xl bg-white/10 p-5">
+                        <p class="text-sm text-gray-200">Available Balance</p>
+                        <h3 class="text-4xl font-extrabold mt-2">₦0.00</h3>
+                    </div>
                 </div>
             </div>
+        </section>
 
-            <!-- Right Action Panel -->
-            <div class="p-10 md:p-14 flex flex-col justify-center bg-[#f9f9f9]">
-                <div class="mb-8">
-                    <h2 class="text-3xl font-bold text-[#0b3a67] mb-3">
-                        Start Your Affiliate Journey
+        <!-- How It Works -->
+        <section id="how-it-works" class="py-20 bg-[#f2f2f2] dark:bg-slate-950">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#0b3a67] dark:text-white">
+                        How It Works
                     </h2>
-                    <p class="text-[#7a7a7a] text-base leading-relaxed">
-                        Become part of the TC affiliate network. Share your code, introduce new users,
-                        and represent a brand committed to academic excellence.
+                    <p class="mt-4 text-[#7a7a7a] dark:text-slate-400">
+                        Start earning as a TC affiliate in a few simple steps.
                     </p>
                 </div>
 
-                <div class="space-y-4">
-                    <a href="{{ route('register') }}"
-                       class="block w-full text-center bg-[#ed1c24] text-white py-3.5 rounded-xl font-semibold text-lg hover:opacity-90 transition">
-                        Become an Affiliate
-                    </a>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl p-7 shadow-sm border border-gray-200 dark:border-slate-800">
+                        <div class="w-12 h-12 rounded-xl bg-[#ed1c24] text-white flex items-center justify-center font-bold mb-5">1</div>
+                        <h3 class="text-xl font-bold text-[#0b3a67] dark:text-white mb-3">Create Account</h3>
+                        <p class="text-[#7a7a7a] dark:text-slate-400 leading-relaxed">
+                            Register as an affiliate and set up your TC affiliate profile.
+                        </p>
+                    </div>
 
-                    <a href="{{ route('login') }}"
-                       class="block w-full text-center border-2 border-[#0b3a67] text-[#0b3a67] py-3.5 rounded-xl font-semibold text-lg hover:bg-[#0b3a67] hover:text-white transition">
-                        Login
-                    </a>
-                </div>
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl p-7 shadow-sm border border-gray-200 dark:border-slate-800">
+                        <div class="w-12 h-12 rounded-xl bg-[#ed1c24] text-white flex items-center justify-center font-bold mb-5">2</div>
+                        <h3 class="text-xl font-bold text-[#0b3a67] dark:text-white mb-3">Share Your Code</h3>
+                        <p class="text-[#7a7a7a] dark:text-slate-400 leading-relaxed">
+                            Create your unique referral code and share it with your audience.
+                        </p>
+                    </div>
 
-                <div class="mt-8 p-5 rounded-2xl bg-white border border-gray-200 shadow-sm">
-                    <h3 class="text-lg font-semibold text-[#0b3a67] mb-2">Why Join TC Affiliates?</h3>
-                    <p class="text-[#7a7a7a] text-sm leading-relaxed">
-                        Promote a trusted learning brand, encourage educational growth, and build a strong referral network with TC.
-                    </p>
-                </div>
-
-                <div class="mt-8 flex items-center gap-3">
-                    <div class="h-1 w-12 bg-[#0b3a67] rounded"></div>
-                    <div class="h-1 w-20 bg-[#ed1c24] rounded"></div>
-                    <div class="h-1 flex-1 bg-gray-300 rounded"></div>
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl p-7 shadow-sm border border-gray-200 dark:border-slate-800">
+                        <div class="w-12 h-12 rounded-xl bg-[#ed1c24] text-white flex items-center justify-center font-bold mb-5">3</div>
+                        <h3 class="text-xl font-bold text-[#0b3a67] dark:text-white mb-3">Track & Withdraw</h3>
+                        <p class="text-[#7a7a7a] dark:text-slate-400 leading-relaxed">
+                            Monitor your growth and request withdrawals from your dashboard.
+                        </p>
+                    </div>
                 </div>
             </div>
+        </section>
 
-        </div>
-    </div>
+        <!-- Benefits -->
+        <section id="benefits" class="bg-white dark:bg-slate-900 py-20">
+            <div class="max-w-7xl mx-auto px-6 lg:px-8">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="text-3xl md:text-4xl font-bold text-[#0b3a67] dark:text-white mb-5">
+                            Built for TC affiliates.
+                        </h2>
+
+                        <p class="text-[#7a7a7a] dark:text-slate-400 leading-relaxed mb-8">
+                            The platform gives every affiliate a simple way to manage referral activity,
+                            monitor performance, and request payouts.
+                        </p>
+
+                        <div class="space-y-4">
+                            <div class="flex gap-3">
+                                <span class="mt-2 w-3 h-3 rounded-full bg-[#ed1c24]"></span>
+                                <p class="text-[#7a7a7a] dark:text-slate-300">Create and manage your personal referral code.</p>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <span class="mt-2 w-3 h-3 rounded-full bg-[#ed1c24]"></span>
+                                <p class="text-[#7a7a7a] dark:text-slate-300">Track account growth and referral activity.</p>
+                            </div>
+
+                            <div class="flex gap-3">
+                                <span class="mt-2 w-3 h-3 rounded-full bg-[#ed1c24]"></span>
+                                <p class="text-[#7a7a7a] dark:text-slate-300">Request withdrawal of available affiliate funds.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="rounded-3xl bg-[#f2f2f2] dark:bg-slate-950 p-8 border border-gray-200 dark:border-slate-800">
+                        <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 shadow-sm border border-gray-100 dark:border-slate-800">
+                            <p class="text-sm text-[#7a7a7a] dark:text-slate-400">Affiliate Balance</p>
+                            <h3 class="text-5xl font-extrabold text-[#0b3a67] dark:text-white mt-3">₦0.00</h3>
+                            <button class="mt-6 w-full rounded-xl bg-[#ed1c24] py-3 font-semibold text-white">
+                                Request Withdrawal
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section id="faq" class="py-20 bg-[#f2f2f2] dark:bg-slate-950">
+            <div class="max-w-4xl mx-auto px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-[#0b3a67] dark:text-white">
+                        Frequently Asked Questions
+                    </h2>
+                </div>
+
+                <div class="space-y-5">
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-200 dark:border-slate-800">
+                        <h3 class="font-bold text-[#0b3a67] dark:text-white mb-2">Do I need a referral code to register?</h3>
+                        <p class="text-[#7a7a7a] dark:text-slate-400">
+                            No. This platform is for affiliates to register directly and create their own referral code.
+                        </p>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-200 dark:border-slate-800">
+                        <h3 class="font-bold text-[#0b3a67] dark:text-white mb-2">Can I choose my own referral code?</h3>
+                        <p class="text-[#7a7a7a] dark:text-slate-400">
+                            Yes. Your referral code must be unique. If someone already uses it, you will need to choose another.
+                        </p>
+                    </div>
+
+                    <div class="bg-white dark:bg-slate-900 rounded-2xl p-6 border border-gray-200 dark:border-slate-800">
+                        <h3 class="font-bold text-[#0b3a67] dark:text-white mb-2">Where do I track my earnings?</h3>
+                        <p class="text-[#7a7a7a] dark:text-slate-400">
+                            After registration and verification, you can log in to your dashboard to track growth and withdrawals.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    @include('components.footer')
 
 </body>
 </html>
