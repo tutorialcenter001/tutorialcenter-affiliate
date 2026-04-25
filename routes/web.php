@@ -14,3 +14,16 @@ Route::get('/login', function () {
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
+
+Route::post('/register', [UserController::class, 'store'])
+    ->name('register.store');
+
+Route::get('/verify-account', function () {
+    return view('auth.verify');
+})->name('verification.notice');
+
+Route::get('/verify/{token}', [UserController::class, 'verifyAccount'])
+    ->name('verification.verify');
+
+Route::post('/resend-verification', [UserController::class, 'resendVerification'])
+    ->name('verification.resend');

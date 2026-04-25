@@ -126,6 +126,48 @@ class UserController extends Controller
         return view('auth.account-verification')->with('success', 'Your account has been verified successfully. You can now log in.');
     }
 
+    // Resend verification email method
+    public function resendVerification(Request $request){
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|string|email|exists:users,email',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Validation failed',
+                'errors' => $validator->errors(),
+            ], 422);
+        }
+
+        $user = User::where('email', $request->email)->first();
+
+        if (! $user) {
+            return response()->json([
+                'message' => 'User not found.',
+            ], 404);
+        }
+
+        if ($user->email_verified_at) {
+            return response()->json([
+                'message' => 'This account is already verified.',
+            ], 422);
+        }
+
+        AccountVerification::where('user_id', $user->id)->delete();
+
+        $verification = AccountVerification::create([
+            'user_id' => $user->id,
+            'token' => rand(100000, 999999),
+            'expires_at' => now()->addHours(24),
+        ]);
+
+        Mail::to($user->email)->send(new VerificationMail($user, $verification->token));
+
+        return response()->json([
+            'message' => 'A new verification token has been sent to your email.',
+        ], 200);
+    }
+
     // Verification token method
     public function verifyToken(Request $request){
         $validator = Validator::make($request->all(), [
@@ -176,48 +218,6 @@ class UserController extends Controller
         return response()->json([
             'message' => 'Account verified successfully.',
             'redirect' => route('login'),
-        ], 200);
-    }
-
-    // Resend verification email method
-    public function resendVerification(Request $request){
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email|exists:users,email',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation failed',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        $user = User::where('email', $request->email)->first();
-
-        if (! $user) {
-            return response()->json([
-                'message' => 'User not found.',
-            ], 404);
-        }
-
-        if ($user->email_verified_at) {
-            return response()->json([
-                'message' => 'This account is already verified.',
-            ], 422);
-        }
-
-        AccountVerification::where('user_id', $user->id)->delete();
-
-        $verification = AccountVerification::create([
-            'user_id' => $user->id,
-            'token' => rand(100000, 999999),
-            'expires_at' => now()->addHours(24),
-        ]);
-
-        Mail::to($user->email)->send(new VerificationMail($user, $verification->token));
-
-        return response()->json([
-            'message' => 'A new verification token has been sent to your email.',
         ], 200);
     }
 
