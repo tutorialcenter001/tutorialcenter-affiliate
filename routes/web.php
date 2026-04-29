@@ -7,9 +7,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-Route::get('/login', function () {
-    return view('auth.login');
-})->name('login');
+// Route::get('/login', function () {
+//     return view('auth.login');
+// })->name('login');
 
 Route::get('/register', function () {
     return view('auth.register');
@@ -27,3 +27,18 @@ Route::get('/verify/{token}', [UserController::class, 'verifyAccount'])
 
 Route::post('/resend-verification', [UserController::class, 'resendVerification'])
     ->name('verification.resend');
+
+Route::get('/login', function () {
+    return view('auth.login');
+})->name('login');
+
+Route::post('/login', [UserController::class, 'login'])
+    ->name('login.store');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [UserController::class, 'dashboard'])
+        ->name('dashboard');
+
+    Route::post('/logout', [UserController::class, 'logoutUser'])
+        ->name('logout');
+});

@@ -18,7 +18,8 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(){
+    public function index()
+    {
         try {
             $users = User::withTrashed()->paginate(15);
 
@@ -31,7 +32,8 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request){
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'firstname' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
@@ -87,7 +89,6 @@ class UserController extends Controller
                 'message' => 'Account created successfully. Please check your email for verification.',
                 'user' => $user,
             ], 201);
-
         } catch (\Exception $e) {
             DB::rollBack();
 
@@ -99,8 +100,11 @@ class UserController extends Controller
         }
     }
 
-    // Account verification method
-    public function verifyAccount($token){
+    /*
+    * Account verification method
+    */
+    public function verifyAccount($token)
+    {
         $verification = AccountVerification::where('token', $token)->first();
 
         if (! $verification) {
@@ -113,21 +117,27 @@ class UserController extends Controller
 
         $user = $verification->user;
 
+        if (! $user) {
+            return view('auth.account-verification')->with('error', 'User account not found.');
+        }
+
         if ($user->email_verified_at) {
             return view('auth.account-verification')->with('success', 'Your account has already been verified.');
         }
 
-        $user->update([
-            'email_verified_at' => now(),
-        ]);
+        $user->email_verified_at = now();
+        $user->save();
 
         $verification->delete();
 
         return view('auth.account-verification')->with('success', 'Your account has been verified successfully. You can now log in.');
     }
 
-    // Resend verification email method
-    public function resendVerification(Request $request){
+    /**
+     * Resend verification email method
+     */
+    public function resendVerification(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'email' => 'required|string|email|exists:users,email',
         ]);
@@ -168,10 +178,14 @@ class UserController extends Controller
         ], 200);
     }
 
-    // Verification token method
-    public function verifyToken(Request $request){
+    /**
+     * Handle user login.
+     */
+    public function login(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-            'token' => 'required|string',
+            'email' => 'required|string|email|exists:users,email',
+            'password' => 'required|string',
         ]);
 
         if ($validator->fails()) {
@@ -181,45 +195,71 @@ class UserController extends Controller
             ], 422);
         }
 
-        $verification = AccountVerification::where('token', $request->token)->first();
+        try {
+            $credentials = $request->only('email', 'password');
 
-        if (! $verification) {
+            if (! Auth::attempt($credentials)) {
+                return response()->json([
+                    'message' => 'Invalid login credentials.',
+                ], 401);
+            }
+
+            $user = Auth::user();
+
+            // 🔒 Check if verified
+            if (! $user->email_verified_at) {
+                Auth::logout();
+
+                return response()->json([
+                    'message' => 'Please verify your email before logging in.',
+                ], 403);
+            }
+
             return response()->json([
-                'message' => 'Invalid verification token.',
-            ], 404);
-        }
-
-        if ($verification->expires_at && now()->gt($verification->expires_at)) {
-            return response()->json([
-                'message' => 'This verification token has expired.',
-            ], 422);
-        }
-
-        $user = $verification->user;
-
-        if (! $user) {
-            return response()->json([
-                'message' => 'User not found for this verification token.',
-            ], 404);
-        }
-
-        if ($user->email_verified_at) {
-            return response()->json([
-                'message' => 'Account already verified.',
-                'redirect' => route('login'),
+                'message' => 'Login successful',
+                'user' => $user,
             ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'error' => 'Login failed',
+                'message' => $e->getMessage(),
+            ], 500);
         }
-
-        $user->email_verified_at = now();
-        $user->save();
-
-        $verification->delete();
-
-        return response()->json([
-            'message' => 'Account verified successfully.',
-            'redirect' => route('login'),
-        ], 200);
     }
+
+    /**
+     * Dashboard for authenticated users
+     **/
+    public function dashboard()
+    {
+        $user = auth()->user();
+
+        return view('dashboard', [
+            'user' => $user,
+            'totalReferrals' => 0,
+            'totalEarnings' => 0,
+            'availableBalance' => 0,
+            'totalWithdrawn' => 0,
+            'recentReferrals' => [],
+            'recentWithdrawals' => [],
+        ]);
+    }
+
+    /**
+     * Logout
+     */
+    public function logoutUser(Request $request)
+    {
+        auth()->logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect()->route('login');
+    }
+
+
+
 
 
 
@@ -253,7 +293,8 @@ class UserController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, User $user){
+    public function update(Request $request, User $user)
+    {
         try {
             $request->validate([
                 'firstname' => 'sometimes|required|string|max:255',
@@ -296,7 +337,8 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(User $user){
+    public function destroy(User $user)
+    {
         try {
             DB::beginTransaction();
 
@@ -314,7 +356,8 @@ class UserController extends Controller
     /**
      * Restore the specified resource from storage.
      */
-    public function restore($id){
+    public function restore($id)
+    {
         try {
             DB::beginTransaction();
 
@@ -327,50 +370,6 @@ class UserController extends Controller
         } catch (\Exception $e) {
             DB::rollBack();
             return response()->json(['error' => 'Failed to restore user', 'message' => $e->getMessage()], 500);
-        }
-    }
-
-    /**
-     * Handle user login.
-     */
-    public function login(Request $request){
-        $validator = Validator::make($request->all(), [
-            'email' => 'required|string|email',
-            'password' => 'required|string',
-        ]);
-
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => 'Validation failed',
-                'errors' => $validator->errors(),
-            ], 422);
-        }
-
-        if (!Auth::attempt($request->only('email', 'password'), $request->remember)) {
-            return response()->json([
-                'message' => 'Invalid login credentials',
-            ], 401);
-        }
-
-        $request->session()->regenerate();
-
-        return response()->json([
-            'message' => 'Login successful',
-            'redirect' => route('dashboard'),
-        ]);
-    }
-
-    /**
-     * Handle user logout.
-     */
-    public function logoutUser(Request $request){
-        try {
-            \Illuminate\Support\Facades\Auth::logout();
-            $request->session()->invalidate();
-            $request->session()->regenerateToken();
-            return redirect('/')->with('success', 'Logged out successfully!');
-        } catch (\Exception $e) {
-            return back()->withErrors(['error' => 'Logout failed: ' . $e->getMessage()]);
         }
     }
 }
