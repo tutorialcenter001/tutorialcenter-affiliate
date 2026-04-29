@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AccountVerification;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Mail\VerificationMail;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Models\AccountVerification;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -81,6 +81,7 @@ class UserController extends Controller
                 'expires_at' => now()->addHours(24),
             ]);
 
+            // Mail::to($user->email)->send(new VerificationMail($user, $verification->token));
             Mail::to($user->email)->send(new VerificationMail($user, $verification->token));
 
             DB::commit();
@@ -257,6 +258,13 @@ class UserController extends Controller
 
         return redirect()->route('login');
     }
+
+
+
+
+
+
+
 
 
 
