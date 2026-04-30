@@ -16,8 +16,7 @@
         <button
             id="mobileDashboardMenuBtn"
             type="button"
-            class="rounded-xl border border-gray-200 px-3 py-2 text-[#0b3a67] dark:border-slate-700 dark:text-white"
-        >
+            class="rounded-xl border border-gray-200 px-3 py-2 text-[#0b3a67] dark:border-slate-700 dark:text-white">
             ☰
         </button>
     </div>
@@ -44,11 +43,21 @@
                 Profile
             </a>
         </nav>
+        <div class="border-t border-white/10 p-5">
+            <form method="POST" action="{{ route('logout') }}">
+                @csrf
+
+                <button type="submit"
+                    class="w-full rounded-xl bg-[#ed1c24] py-3 font-semibold text-white transition hover:opacity-90">
+                    Logout
+                </button>
+            </form>
+        </div>
     </div>
 </div>
 
 <script>
-    document.getElementById('mobileDashboardMenuBtn')?.addEventListener('click', function () {
+    document.getElementById('mobileDashboardMenuBtn')?.addEventListener('click', function() {
         document.getElementById('mobileDashboardMenu')?.classList.toggle('hidden');
     });
 </script>
