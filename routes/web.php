@@ -7,10 +7,6 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
-// Route::get('/login', function () {
-//     return view('auth.login');
-// })->name('login');
-
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
@@ -41,4 +37,20 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/logout', [UserController::class, 'logoutUser'])
         ->name('logout');
+});
+
+Route::middleware('guest')->group(function () {
+    Route::get('/forgot-password', function () {
+        return view('auth.forgot-password');
+    })->name('password.request');
+
+    Route::post('/forgot-password', [UserController::class, 'sendPasswordResetLink'])
+        ->name('password.email');
+
+    Route::get('/reset-password/{token}', function ($token) {
+        return view('auth.reset-password', ['token' => $token]);
+    })->name('password.reset');
+
+    Route::post('/reset-password', [UserController::class, 'resetPassword'])
+        ->name('password.update');
 });

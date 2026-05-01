@@ -1,0 +1,118 @@
+@extends('layouts.app', ['title' => 'Forgot Password'])
+
+@section('content')
+<section class="min-h-screen flex items-center justify-center bg-[#f2f2f2] px-4 py-12 dark:bg-slate-950">
+    <div class="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl dark:border-slate-800 dark:bg-slate-900">
+        <h1 class="text-3xl font-bold text-[#0b3a67] dark:text-white">Forgot Password</h1>
+        <p class="mt-2 text-sm text-gray-500 dark:text-slate-400">
+            Enter your email and we’ll send you a reset link.
+        </p>
+
+        <div id="successMessage" class="mt-5 hidden rounded-xl border border-green-200 bg-green-50 px-4 py-3 text-green-700"></div>
+        <div id="errorMessage" class="mt-5 hidden rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-red-700"></div>
+
+        <form id="forgotPasswordForm" class="mt-6 space-y-5">
+            @csrf
+
+            <div>
+                <label class="mb-2 block text-sm font-semibold text-[#0b3a67] dark:text-white">
+                    Email Address
+                </label>
+                <input
+                    type="email"
+                    name="email"
+                    placeholder="Enter your email"
+                    class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 outline-none focus:border-[#0b3a67] focus:ring-2 focus:ring-[#0b3a67]/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
+                >
+                <p class="mt-2 text-sm text-red-600" data-error="email"></p>
+            </div>
+
+            <button
+                id="submitBtn"
+                type="submit"
+                class="flex w-full items-center justify-center gap-2 rounded-xl bg-[#ed1c24] py-3.5 font-semibold text-white transition hover:opacity-90 disabled:opacity-60"
+            >
+                <svg id="loader" class="hidden h-5 w-5 animate-spin text-white" viewBox="0 0 24 24" fill="none">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"></path>
+                </svg>
+                <span id="btnText">Send Reset Link</span>
+            </button>
+
+            <p class="text-center text-sm text-gray-500 dark:text-slate-400">
+                Remember password?
+                <a href="{{ route('login') }}" class="font-semibold text-[#0b3a67] hover:text-[#ed1c24] dark:text-white">
+                    Login
+                </a>
+            </p>
+        </form>
+    </div>
+</section>
+
+<script>
+const form = document.getElementById('forgotPasswordForm');
+const submitBtn = document.getElementById('submitBtn');
+const btnText = document.getElementById('btnText');
+const loader = document.getElementById('loader');
+const successMessage = document.getElementById('successMessage');
+const errorMessage = document.getElementById('errorMessage');
+
+function setLoading(value) {
+    submitBtn.disabled = value;
+    loader.classList.toggle('hidden', !value);
+    btnText.textContent = value ? 'Sending...' : 'Send Reset Link';
+}
+
+function clearMessages() {
+    document.querySelectorAll('[data-error]').forEach(el => el.textContent = '');
+    successMessage.classList.add('hidden');
+    errorMessage.classList.add('hidden');
+}
+
+function showErrors(errors) {
+    Object.keys(errors).forEach(key => {
+        const field = document.querySelector(`[data-error="${key}"]`);
+        if (field) field.textContent = errors[key][0];
+    });
+}
+
+form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    clearMessages();
+    setLoading(true);
+
+    try {
+        const response = await fetch(`{{ route('password.email') }}`, {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
+                'Accept': 'application/json',
+                'X-Requested-With': 'XMLHttpRequest'
+            },
+            credentials: 'same-origin',
+            body: new FormData(form)
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            successMessage.textContent = data.message || 'Password reset link sent.';
+            successMessage.classList.remove('hidden');
+            form.reset();
+        } else if (response.status === 422) {
+            errorMessage.textContent = data.message || 'Validation failed.';
+            errorMessage.classList.remove('hidden');
+            showErrors(data.errors || {});
+        } else {
+            errorMessage.textContent = data.message || 'Something went wrong.';
+            errorMessage.classList.remove('hidden');
+        }
+    } catch (error) {
+        errorMessage.textContent = 'Unable to send reset link right now.';
+        errorMessage.classList.remove('hidden');
+    } finally {
+        setLoading(false);
+    }
+});
+</script>
+@endsection

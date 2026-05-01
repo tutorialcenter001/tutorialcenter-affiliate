@@ -162,17 +162,17 @@
                 <p class="mt-2 text-sm text-red-600" data-error="role"></p>
 
                 <button id="submitBtn" type="submit"
-    class="flex w-full items-center justify-center gap-2 rounded-xl bg-[#ed1c24] py-3.5 font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60">
+                    class="flex w-full items-center justify-center gap-2 rounded-xl bg-[#ed1c24] py-3.5 font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60">
 
-    <svg id="submitLoader" class="hidden h-5 w-5 animate-spin text-white" viewBox="0 0 24 24" fill="none">
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-        <path class="opacity-75" fill="currentColor"
-            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
-        </path>
-    </svg>
+                    <svg id="submitLoader" class="hidden h-5 w-5 animate-spin text-white" viewBox="0 0 24 24" fill="none">
+                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                        <path class="opacity-75" fill="currentColor"
+                            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z">
+                        </path>
+                    </svg>
 
-    <span id="submitBtnText">Create Account</span>
-</button>
+                    <span id="submitBtnText">Create Account</span>
+                </button>
 
                 <p class="text-center text-sm text-gray-500 dark:text-slate-400">
                     Already have an account?
@@ -185,147 +185,6 @@
     </div>
 </section>
 
-<!-- <script>
-    const registerForm = document.getElementById('registerForm');
-    const submitBtn = document.getElementById('submitBtn');
-    const errorMessage = document.getElementById('errorMessage');
-
-    const dropArea = document.getElementById('dropArea');
-    const fileInput = document.getElementById('profilePictureInput');
-    const imagePreview = document.getElementById('imagePreview');
-    const uploadPlaceholder = document.getElementById('uploadPlaceholder');
-
-    function clearErrors() {
-        document.querySelectorAll('[data-error]').forEach(el => el.textContent = '');
-        errorMessage.classList.add('hidden');
-        errorMessage.textContent = '';
-    }
-
-    function showErrors(errors) {
-        Object.keys(errors).forEach(key => {
-            const field = document.querySelector(`[data-error="${key}"]`);
-            if (field) {
-                field.textContent = errors[key][0];
-            }
-        });
-    }
-
-    function previewImage(file) {
-        if (!file) return;
-
-        if (!file.type.startsWith('image/')) {
-            document.querySelector('[data-error="profile_picture"]').textContent = 'Please upload a valid image file.';
-            return;
-        }
-
-        const reader = new FileReader();
-
-        reader.onload = function(event) {
-            imagePreview.src = event.target.result;
-            imagePreview.classList.remove('hidden');
-            uploadPlaceholder.classList.add('hidden');
-        };
-
-        reader.readAsDataURL(file);
-    }
-
-    fileInput.addEventListener('change', function() {
-        previewImage(this.files[0]);
-    });
-
-    ['dragenter', 'dragover'].forEach(eventName => {
-        dropArea.addEventListener(eventName, function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            dropArea.classList.add('border-[#ed1c24]', 'bg-red-50', 'dark:bg-slate-800');
-        });
-    });
-
-    ['dragleave', 'drop'].forEach(eventName => {
-        dropArea.addEventListener(eventName, function(event) {
-            event.preventDefault();
-            event.stopPropagation();
-            dropArea.classList.remove('border-[#ed1c24]', 'bg-red-50', 'dark:bg-slate-800');
-        });
-    });
-
-    dropArea.addEventListener('drop', function(event) {
-        const file = event.dataTransfer.files[0];
-
-        if (!file) return;
-
-        const dataTransfer = new DataTransfer();
-        dataTransfer.items.add(file);
-        fileInput.files = dataTransfer.files;
-
-        previewImage(file);
-    });
-
-    document.querySelectorAll('[data-toggle-password]').forEach(button => {
-        button.addEventListener('click', function() {
-            const input = document.getElementById(this.dataset.togglePassword);
-            const eyeOpen = this.querySelector('.eye-open');
-            const eyeClosed = this.querySelector('.eye-closed');
-
-            if (!input) return;
-
-            const isPassword = input.type === 'password';
-            input.type = isPassword ? 'text' : 'password';
-
-            eyeOpen.classList.toggle('hidden', isPassword);
-            eyeClosed.classList.toggle('hidden', !isPassword);
-        });
-    });
-
-    registerForm.addEventListener('submit', async function(e) {
-        e.preventDefault();
-        clearErrors();
-
-        submitBtn.disabled = true;
-        submitBtn.textContent = 'Creating Account...';
-
-        try {
-            const response = await fetch(`{{ route('register.store') }}`, {
-                method: 'POST',
-                headers: {
-                    'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content,
-                    'Accept': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest'
-                },
-                credentials: 'same-origin',
-                body: new FormData(registerForm)
-            });
-
-            // const data = await response.json();
-
-            const text = await response.text();
-
-            let data = {};
-            try {
-                data = JSON.parse(text);
-            } catch (e) {
-                throw new Error(text);
-            }
-
-            if (response.status === 201) {
-                window.location.href = `{{ route('verification.notice') }}?email=${encodeURIComponent(data.user.email)}`;
-            } else if (response.status === 422) {
-                errorMessage.textContent = data.message || 'Validation failed.';
-                errorMessage.classList.remove('hidden');
-                showErrors(data.errors || {});
-            } else {
-                errorMessage.textContent = data.message || data.error || 'Something went wrong.';
-                errorMessage.classList.remove('hidden');
-            }
-        } catch (error) {
-            errorMessage.textContent = 'Unable to register right now. Please try again.';
-            errorMessage.classList.remove('hidden');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.textContent = 'Create Account';
-        }
-    });
-</script> -->
 
 <script>
     const registerForm = document.getElementById('registerForm');
@@ -377,7 +236,9 @@
 
         setTimeout(() => {
             if (element.focus && element.type !== 'file' && element.type !== 'hidden') {
-                element.focus({ preventScroll: true });
+                element.focus({
+                    preventScroll: true
+                });
             }
         }, 450);
     }
