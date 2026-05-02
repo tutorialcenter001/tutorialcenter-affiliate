@@ -1,15 +1,19 @@
 <?php
 
-use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ReferralController;
 
+// landing page
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+// registration page
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
+
 
 Route::post('/register', [UserController::class, 'store'])
     ->name('register.store');
@@ -34,6 +38,9 @@ Route::post('/login', [UserController::class, 'login'])
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])
         ->name('dashboard');
+    
+    Route::get('/referrals', [ReferralController::class, 'referrals'])
+        ->name('referrals.index');
 
     Route::post('/logout', [UserController::class, 'logoutUser'])
         ->name('logout');
