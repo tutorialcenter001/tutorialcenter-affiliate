@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Mail\VerificationMail;
+use App\Models\AffiliateEarning;
 use Illuminate\Support\Facades\DB;
 use App\Models\AccountVerification;
 use Illuminate\Support\Facades\Auth;
@@ -348,6 +349,42 @@ class UserController extends Controller
         ]);
     }
 
+    /**
+     * Display user's earnings and referral details.
+     */
+    public function earnings()
+    {
+        $user = auth()->user();
+
+        $earnings = AffiliateEarning::with('referral')
+            ->where('user_id', $user->id)
+            ->latest()
+            ->paginate(10);
+
+        $totalEarnings = AffiliateEarning::where('user_id', $user->id)
+            ->sum('amount');
+
+        $pendingEarnings = AffiliateEarning::where('user_id', $user->id)
+            ->where('status', 'pending')
+            ->sum('amount');
+
+        $approvedEarnings = AffiliateEarning::where('user_id', $user->id)
+            ->where('status', 'approved')
+            ->sum('amount');
+
+        $paidEarnings = AffiliateEarning::where('user_id', $user->id)
+            ->where('status', 'paid')
+            ->sum('amount');
+
+        return view('earnings.index', [
+            'user' => $user,
+            'earnings' => $earnings,
+            'totalEarnings' => $totalEarnings,
+            'pendingEarnings' => $pendingEarnings,
+            'approvedEarnings' => $approvedEarnings,
+            'paidEarnings' => $paidEarnings,
+        ]);
+    }
 
 
 

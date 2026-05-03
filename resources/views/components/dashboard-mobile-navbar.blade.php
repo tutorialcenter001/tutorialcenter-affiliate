@@ -27,11 +27,11 @@
                 Dashboard
             </a>
 
-            <a href="#" class="block rounded-xl px-4 py-3 text-sm font-semibold text-[#0b3a67] dark:text-white">
+            <a href="{{ route('referrals.index') }}" class="block rounded-xl px-4 py-3 text-sm font-semibold text-[#0b3a67] dark:text-white">
                 Referrals
             </a>
 
-            <a href="#" class="block rounded-xl px-4 py-3 text-sm font-semibold text-[#0b3a67] dark:text-white">
+            <a href="{{ route('earnings.index') }}" class="block rounded-xl px-4 py-3 text-sm font-semibold text-[#0b3a67] dark:text-white">
                 Earnings
             </a>
 

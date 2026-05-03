@@ -38,9 +38,12 @@ Route::post('/login', [UserController::class, 'login'])
 Route::middleware('auth')->group(function () {
     Route::get('/dashboard', [UserController::class, 'dashboard'])
         ->name('dashboard');
-    
+
     Route::get('/referrals', [ReferralController::class, 'referrals'])
         ->name('referrals.index');
+
+    Route::get('/earnings', [UserController::class, 'earnings'])
+        ->name('earnings.index');
 
     Route::post('/logout', [UserController::class, 'logoutUser'])
         ->name('logout');

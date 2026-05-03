@@ -18,7 +18,7 @@
             Referrals
         </a>
 
-        <a href="#"
+        <a href="{{ route('earnings.index') }}"
            class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
             Earnings
         </a>
