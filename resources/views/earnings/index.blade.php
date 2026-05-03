@@ -2,37 +2,37 @@
 
     <x-dashboard-header :user="$user" />
 
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <div class="grid gap-4 sm:gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <p class="text-sm text-gray-500 dark:text-slate-400">Total Earnings</p>
-            <h2 class="mt-2 text-3xl font-bold text-[#0b3a67] dark:text-white">
+            <h2 class="mt-2 break-words text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">
                 ₦{{ number_format($totalEarnings, 2) }}
             </h2>
         </div>
 
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <p class="text-sm text-gray-500 dark:text-slate-400">Pending</p>
-            <h2 class="mt-2 text-3xl font-bold text-yellow-600">
+            <h2 class="mt-2 break-words text-2xl font-bold text-yellow-600 sm:text-3xl">
                 ₦{{ number_format($pendingEarnings, 2) }}
             </h2>
         </div>
 
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <p class="text-sm text-gray-500 dark:text-slate-400">Approved</p>
-            <h2 class="mt-2 text-3xl font-bold text-green-600">
+            <h2 class="mt-2 break-words text-2xl font-bold text-green-600 sm:text-3xl">
                 ₦{{ number_format($approvedEarnings, 2) }}
             </h2>
         </div>
 
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <p class="text-sm text-gray-500 dark:text-slate-400">Paid</p>
-            <h2 class="mt-2 text-3xl font-bold text-[#ed1c24]">
+            <h2 class="mt-2 break-words text-2xl font-bold text-[#ed1c24] sm:text-3xl">
                 ₦{{ number_format($paidEarnings, 2) }}
             </h2>
         </div>
     </div>
 
-    <div class="mt-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <div class="mt-8 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
         <div class="mb-6">
             <h1 class="text-2xl font-bold text-[#0b3a67] dark:text-white">
                 My Earnings
@@ -43,7 +43,7 @@
         </div>
 
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
+                <table class="min-w-[56rem] w-full text-left text-sm">
                 <thead>
                     <tr class="border-b border-gray-200 text-gray-500 dark:border-slate-800 dark:text-slate-400">
                         <th class="py-3 pr-4">Referral</th>

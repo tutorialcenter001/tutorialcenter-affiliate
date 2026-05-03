@@ -1,13 +1,13 @@
-<div class="sticky top-0 z-50 border-b border-gray-200 bg-white px-4 py-3 shadow-sm dark:border-slate-800 dark:bg-slate-900 lg:hidden">
+<div class="sticky top-0 z-50 border-b border-gray-200 bg-white px-3 py-3 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:px-4 lg:hidden">
     <div class="flex items-center justify-between">
-        <div class="flex items-center gap-3">
-            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="h-10 w-auto">
+        <div class="min-w-0 flex items-center gap-3">
+            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="h-10 w-auto shrink-0">
 
-            <div>
-                <h1 class="text-sm font-bold text-[#0b3a67] dark:text-white">
+            <div class="min-w-0">
+                <h1 class="truncate text-sm font-bold text-[#0b3a67] dark:text-white">
                     TC Affiliates
                 </h1>
-                <p class="text-xs text-gray-500 dark:text-slate-400">
+                <p class="truncate text-xs text-gray-500 dark:text-slate-400">
                     Dashboard
                 </p>
             </div>
@@ -16,12 +16,12 @@
         <button
             id="mobileDashboardMenuBtn"
             type="button"
-            class="rounded-xl border border-gray-200 px-3 py-2 text-[#0b3a67] dark:border-slate-700 dark:text-white">
+            class="shrink-0 rounded-xl border border-gray-200 px-3 py-2 text-[#0b3a67] dark:border-slate-700 dark:text-white">
             ☰
         </button>
     </div>
 
-    <div id="mobileDashboardMenu" class="hidden pt-4">
+    <div id="mobileDashboardMenu" class="hidden max-h-[calc(100vh-5rem)] overflow-y-auto pt-4">
         <nav class="space-y-2">
             <a href="{{ route('dashboard') }}" class="block rounded-xl bg-[#0b3a67] px-4 py-3 text-sm font-semibold text-white">
                 Dashboard
@@ -39,7 +39,7 @@
                 Withdrawals
             </a>
 
-            <a href="#" class="block rounded-xl px-4 py-3 text-sm font-semibold text-[#0b3a67] dark:text-white">
+            <a href="{{ route('profile.show') }}" class="block rounded-xl px-4 py-3 text-sm font-semibold text-[#0b3a67] dark:text-white">
                 Profile
             </a>
         </nav>

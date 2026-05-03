@@ -9,19 +9,19 @@
         $pageTitle = $title ?? 'TC Affiliates';
     @endphp
 
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div class="flex h-20 items-center justify-between">
 
-            <div class="flex items-center gap-4">
-                <a href="{{ route('welcome') }}" class="flex items-center gap-3">
+            <div class="min-w-0 flex items-center gap-4">
+                <a href="{{ route('welcome') }}" class="flex shrink-0 items-center gap-3">
                     <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="h-10 w-auto">
                 </a>
 
-                <div class="hidden sm:block">
-                    <h1 class="text-lg font-bold text-[#0b3a67] dark:text-white">
+                <div class="hidden min-w-0 sm:block">
+                    <h1 class="truncate text-lg font-bold text-[#0b3a67] dark:text-white">
                         {{ $pageTitle }}
                     </h1>
-                    <p class="text-xs text-gray-500 dark:text-slate-400">
+                    <p class="truncate text-xs text-gray-500 dark:text-slate-400">
                         TC Affiliates
                     </p>
                 </div>
@@ -33,7 +33,7 @@
                 <a href="{{ route('welcome') }}#faq" class="hover:text-[#ed1c24] transition">FAQ</a>
             </nav>
 
-            <div class="flex items-center gap-3">
+            <div class="shrink-0 flex items-center gap-2 sm:gap-3">
 
                 <button
                     type="button"
@@ -77,7 +77,7 @@
             </div>
         </div>
 
-        <div id="mobileMenu" class="hidden lg:hidden pb-6">
+        <div id="mobileMenu" class="hidden max-h-[calc(100vh-5rem)] overflow-y-auto pb-6 lg:hidden">
             <div class="space-y-2 pt-4 border-t border-gray-200 dark:border-slate-800">
                 <a href="{{ route('welcome') }}#how-it-works" class="block rounded-xl px-4 py-3 text-sm font-semibold text-[#0b3a67] hover:bg-gray-100 dark:text-slate-200 dark:hover:bg-slate-800">
                     How It Works

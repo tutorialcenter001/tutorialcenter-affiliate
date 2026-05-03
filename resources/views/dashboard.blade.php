@@ -3,31 +3,31 @@
     <x-dashboard-header :user="$user" />
 
     {{-- Stats --}}
-    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <div class="grid gap-4 sm:gap-6 md:grid-cols-2 xl:grid-cols-4">
+        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <p class="text-sm text-gray-500 dark:text-slate-400">Total Referrals</p>
-            <h2 class="mt-2 text-3xl font-bold text-[#0b3a67] dark:text-white">
+            <h2 class="mt-2 break-words text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">
                 {{ $totalReferrals }}
             </h2>
         </div>
 
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <p class="text-sm text-gray-500 dark:text-slate-400">Total Earnings</p>
-            <h2 class="mt-2 text-3xl font-bold text-[#0b3a67] dark:text-white">
+            <h2 class="mt-2 break-words text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">
                 ₦{{ number_format($totalEarnings, 2) }}
             </h2>
         </div>
 
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <p class="text-sm text-gray-500 dark:text-slate-400">Available Balance</p>
-            <h2 class="mt-2 text-3xl font-bold text-[#ed1c24]">
+            <h2 class="mt-2 break-words text-2xl font-bold text-[#ed1c24] sm:text-3xl">
                 ₦{{ number_format($availableBalance, 2) }}
             </h2>
         </div>
 
-        <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <p class="text-sm text-gray-500 dark:text-slate-400">Total Withdrawn</p>
-            <h2 class="mt-2 text-3xl font-bold text-[#0b3a67] dark:text-white">
+            <h2 class="mt-2 break-words text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">
                 ₦{{ number_format($totalWithdrawn, 2) }}
             </h2>
         </div>
@@ -37,7 +37,7 @@
     <div class="mt-8 grid gap-6 xl:grid-cols-3">
 
         {{-- Referral Activity --}}
-        <div class="xl:col-span-2 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6 xl:col-span-2">
             <div class="mb-5">
                 <h2 class="text-xl font-bold text-[#0b3a67] dark:text-white">
                     Recent Referral Activity
@@ -48,7 +48,7 @@
             </div>
 
             <div class="overflow-x-auto">
-                <table class="w-full text-left text-sm">
+                <table class="min-w-[42rem] w-full text-left text-sm">
                     <thead>
                         <tr class="border-b border-gray-200 text-gray-500 dark:border-slate-800 dark:text-slate-400">
                             <th class="py-3 pr-4">Name</th>
@@ -89,7 +89,7 @@
         </div>
 
         {{-- Withdraw --}}
-        <div id="withdraw" class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div id="withdraw" class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <h2 class="text-xl font-bold text-[#0b3a67] dark:text-white">
                 Withdraw Funds
             </h2>
@@ -98,9 +98,9 @@
                 Request withdrawal from your available balance.
             </p>
 
-            <div class="mt-6 rounded-2xl bg-gray-50 p-5 dark:bg-slate-950">
+            <div class="mt-6 rounded-2xl bg-gray-50 p-4 dark:bg-slate-950 sm:p-5">
                 <p class="text-sm text-gray-500 dark:text-slate-400">Available Balance</p>
-                <p class="mt-2 text-3xl font-extrabold text-[#ed1c24]">
+                <p class="mt-2 break-words text-2xl font-extrabold text-[#ed1c24] sm:text-3xl">
                     ₦{{ number_format($availableBalance, 2) }}
                 </p>
             </div>
@@ -131,7 +131,7 @@
     </div>
 
     {{-- Account Details --}}
-    <div class="mt-8 rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <div class="mt-8 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
         <h2 class="text-xl font-bold text-[#0b3a67] dark:text-white">
             Account Details
         </h2>

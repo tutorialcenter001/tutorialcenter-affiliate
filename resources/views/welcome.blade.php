@@ -6,7 +6,7 @@
 <section class="relative overflow-hidden bg-white dark:bg-slate-950">
     <div class="absolute inset-0 bg-gradient-to-br from-[#0b3a67]/10 via-transparent to-[#ed1c24]/10 dark:from-[#0b3a67]/30 dark:to-[#ed1c24]/20"></div>
 
-    <div class="relative max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28 grid lg:grid-cols-2 gap-12 items-center">
+    <div class="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-6 sm:py-20 lg:grid-cols-2 lg:px-8 lg:py-28">
 
         <!-- Left -->
         <div>
@@ -14,11 +14,11 @@
                 TC Affiliate Platform
             </p>
 
-            <h1 class="text-4xl md:text-6xl font-extrabold text-[#0b3a67] dark:text-white leading-tight">
+            <h1 class="text-3xl font-extrabold leading-tight text-[#0b3a67] dark:text-white sm:text-4xl md:text-6xl">
                 Earn with TC by sharing your referral code
             </h1>
 
-            <p class="mt-6 text-lg text-[#7a7a7a] dark:text-slate-300 leading-relaxed max-w-xl">
+            <p class="mt-6 max-w-xl text-base leading-relaxed text-[#7a7a7a] dark:text-slate-300 sm:text-lg">
                 Create your affiliate account, generate your referral code, track your growth,
                 monitor earnings, and withdraw your funds — all from one dashboard.
             </p>
@@ -41,28 +41,28 @@
         </div>
 
         <!-- Right -->
-        <div class="rounded-3xl bg-[#0b3a67] dark:bg-slate-900 p-8 text-white shadow-2xl border border-white/10">
+        <div class="rounded-3xl border border-white/10 bg-[#0b3a67] p-5 text-white shadow-2xl dark:bg-slate-900 sm:p-8">
 
-            <div class="bg-white/10 rounded-2xl p-6 mb-6">
+            <div class="mb-6 rounded-2xl bg-white/10 p-4 sm:p-6">
                 <p class="text-sm text-gray-200">Your Referral Code</p>
-                <h2 class="text-4xl font-extrabold text-[#ed1c24] mt-2">TC-USER123</h2>
+                <h2 class="mt-2 break-all text-2xl font-extrabold text-[#ed1c24] sm:text-4xl">TC-USER123</h2>
             </div>
 
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-5">
+            <div class="grid gap-4 sm:grid-cols-2">
+                <div class="rounded-2xl bg-white p-4 dark:bg-slate-800 sm:p-5">
                     <p class="text-sm text-gray-500 dark:text-slate-400">Referrals</p>
-                    <h3 class="text-3xl font-bold text-[#0b3a67] dark:text-white">0</h3>
+                    <h3 class="text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">0</h3>
                 </div>
 
-                <div class="bg-white dark:bg-slate-800 rounded-2xl p-5">
+                <div class="rounded-2xl bg-white p-4 dark:bg-slate-800 sm:p-5">
                     <p class="text-sm text-gray-500 dark:text-slate-400">Earnings</p>
-                    <h3 class="text-3xl font-bold text-[#0b3a67] dark:text-white">₦0</h3>
+                    <h3 class="text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">₦0</h3>
                 </div>
             </div>
 
-            <div class="mt-6 rounded-2xl bg-white/10 p-5">
+            <div class="mt-6 rounded-2xl bg-white/10 p-4 sm:p-5">
                 <p class="text-sm text-gray-200">Available Balance</p>
-                <h3 class="text-4xl font-extrabold mt-2">₦0.00</h3>
+                <h3 class="mt-2 break-words text-3xl font-extrabold sm:text-4xl">₦0.00</h3>
             </div>
         </div>
 
@@ -70,8 +70,8 @@
 </section>
 
 <!-- How It Works -->
-<section id="how-it-works" class="py-20 bg-[#f2f2f2] dark:bg-slate-950">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8">
+<section id="how-it-works" class="bg-[#f2f2f2] py-14 dark:bg-slate-950 sm:py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
 
         <div class="text-center max-w-3xl mx-auto mb-12">
             <h2 class="text-3xl md:text-4xl font-bold text-[#0b3a67] dark:text-white">
@@ -107,8 +107,8 @@
 </section>
 
 <!-- Benefits -->
-<section id="benefits" class="bg-white dark:bg-slate-900 py-20">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+<section id="benefits" class="bg-white py-14 dark:bg-slate-900 sm:py-20">
+    <div class="mx-auto grid max-w-7xl items-center gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
 
         <div>
             <h2 class="text-3xl md:text-4xl font-bold text-[#0b3a67] dark:text-white mb-5">
@@ -126,10 +126,10 @@
             </ul>
         </div>
 
-        <div class="bg-[#f2f2f2] dark:bg-slate-950 p-8 rounded-3xl border border-gray-200 dark:border-slate-800">
-            <div class="bg-white dark:bg-slate-900 p-6 rounded-2xl">
+        <div class="rounded-3xl border border-gray-200 bg-[#f2f2f2] p-4 dark:border-slate-800 dark:bg-slate-950 sm:p-8">
+            <div class="rounded-2xl bg-white p-4 dark:bg-slate-900 sm:p-6">
                 <p class="text-gray-500">Affiliate Balance</p>
-                <h3 class="text-5xl font-bold mt-3 text-[#0b3a67] dark:text-white">₦0.00</h3>
+                <h3 class="mt-3 break-words text-4xl font-bold text-[#0b3a67] dark:text-white sm:text-5xl">₦0.00</h3>
 
                 <button class="mt-6 w-full bg-[#ed1c24] text-white py-3 rounded-xl">
                     Request Withdrawal
@@ -141,8 +141,8 @@
 </section>
 
 <!-- FAQ -->
-<section id="faq" class="py-20 bg-[#f2f2f2] dark:bg-slate-950">
-    <div class="max-w-4xl mx-auto px-6">
+<section id="faq" class="bg-[#f2f2f2] py-14 dark:bg-slate-950 sm:py-20">
+    <div class="mx-auto max-w-4xl px-4 sm:px-6">
 
         <h2 class="text-3xl font-bold text-center text-[#0b3a67] dark:text-white mb-10">
             FAQ

@@ -1,9 +1,9 @@
 @extends('layouts.app', ['title' => 'Forgot Password'])
 
 @section('content')
-<section class="min-h-screen flex items-center justify-center bg-[#f2f2f2] px-4 py-12 dark:bg-slate-950">
-    <div class="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl dark:border-slate-800 dark:bg-slate-900">
-        <h1 class="text-3xl font-bold text-[#0b3a67] dark:text-white">Forgot Password</h1>
+<section class="flex min-h-screen items-center justify-center bg-[#f2f2f2] px-3 py-8 dark:bg-slate-950 sm:px-4 sm:py-12">
+    <div class="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl dark:border-slate-800 dark:bg-slate-900 sm:p-8">
+        <h1 class="text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">Forgot Password</h1>
         <p class="mt-2 text-sm text-gray-500 dark:text-slate-400">
             Enter your email and we’ll send you a reset link.
         </p>

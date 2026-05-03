@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\ReferralController;
+use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 
 // landing page
 Route::get('/', function () {
@@ -13,7 +13,6 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('auth.register');
 })->name('register');
-
 
 Route::post('/register', [UserController::class, 'store'])
     ->name('register.store');
@@ -44,6 +43,15 @@ Route::middleware('auth')->group(function () {
 
     Route::get('/earnings', [UserController::class, 'earnings'])
         ->name('earnings.index');
+
+    Route::get('/profile', [UserController::class, 'profile'])
+        ->name('profile.show');
+
+    Route::patch('/profile', [UserController::class, 'updateProfile'])
+        ->name('profile.update');
+
+    Route::post('/profile/bank-accounts', [UserController::class, 'storeBankAccount'])
+        ->name('profile.bank-accounts.store');
 
     Route::post('/logout', [UserController::class, 'logoutUser'])
         ->name('logout');

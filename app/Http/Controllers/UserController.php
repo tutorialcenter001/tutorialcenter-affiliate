@@ -2,20 +2,23 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
-use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
+use App\Http\Requests\StoreBankAccountRequest;
+use App\Http\Requests\UpdateProfileRequest;
 use App\Mail\VerificationMail;
-use App\Models\AffiliateEarning;
-use Illuminate\Support\Facades\DB;
 use App\Models\AccountVerification;
+use App\Models\AffiliateEarning;
+use App\Models\User;
+use Carbon\Carbon;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
-
+use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 class UserController extends Controller
 {
@@ -64,7 +67,7 @@ class UserController extends Controller
         DB::beginTransaction();
 
         try {
-            $user = new User();
+            $user = new User;
             $user->firstname = $request->firstname;
             $user->surname = $request->surname;
             $user->email = $request->email;
@@ -251,6 +254,76 @@ class UserController extends Controller
     }
 
     /**
+     * Display the authenticated user's profile.
+     */
+    public function profile(): View
+    {
+        $user = auth()->user();
+
+        $bankAccounts = $user->bankAccounts()
+            ->latest()
+            ->get();
+
+        return view('profile.show', [
+            'user' => $user,
+            'bankAccounts' => $bankAccounts,
+        ]);
+    }
+
+    /**
+     * Update the authenticated user's profile.
+     */
+    public function updateProfile(UpdateProfileRequest $request): RedirectResponse
+    {
+        $user = $request->user();
+        $validated = $request->validated();
+
+        if ($request->hasFile('profile_picture')) {
+            if ($user->profile_picture) {
+                Storage::disk('public')->delete($user->profile_picture);
+            }
+
+            $validated['profile_picture'] = $request->file('profile_picture')->store('profile_pictures', 'public');
+        }
+
+        $user->update($validated);
+        $user->bankAccounts()->update([
+            'account_name' => trim($validated['firstname'].' '.$validated['surname']),
+        ]);
+
+        return redirect()
+            ->route('profile.show')
+            ->with('success', 'Profile updated successfully.');
+    }
+
+    /**
+     * Store a bank account for the authenticated user.
+     */
+    public function storeBankAccount(StoreBankAccountRequest $request): RedirectResponse
+    {
+        $user = $request->user();
+        $validated = $request->validated();
+        $shouldBeDefault = $request->boolean('is_default') || ! $user->bankAccounts()->exists();
+
+        if ($shouldBeDefault) {
+            $user->bankAccounts()->update([
+                'is_default' => false,
+            ]);
+        }
+
+        $user->bankAccounts()->create([
+            'bank_name' => $validated['bank_name'],
+            'account_name' => trim($user->firstname.' '.$user->surname),
+            'account_number' => $validated['account_number'],
+            'is_default' => $shouldBeDefault,
+        ]);
+
+        return redirect()
+            ->route('profile.show')
+            ->with('success', 'Bank account added successfully.');
+    }
+
+    /**
      * Logout
      */
     public function logoutUser(Request $request)
@@ -289,7 +362,7 @@ class UserController extends Controller
             ]
         );
 
-        $resetUrl = route('password.reset', ['token' => $token]) . '?email=' . urlencode($request->email);
+        $resetUrl = route('password.reset', ['token' => $token]).'?email='.urlencode($request->email);
 
         Mail::raw("Click this link to reset your password: {$resetUrl}", function ($message) use ($request) {
             $message->to($request->email)
@@ -386,43 +459,6 @@ class UserController extends Controller
         ]);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     /**
      * Update the specified resource in storage.
      */
@@ -432,9 +468,9 @@ class UserController extends Controller
             $request->validate([
                 'firstname' => 'sometimes|required|string|max:255',
                 'surname' => 'sometimes|required|string|max:255',
-                'email' => 'sometimes|required|string|email|max:255|unique:users,email,' . $user->id,
+                'email' => 'sometimes|required|string|email|max:255|unique:users,email,'.$user->id,
                 'password' => 'sometimes|required|string|min:8',
-                'referral_code' => 'sometimes|required|string|max:255|unique:users,referral_code,' . $user->id,
+                'referral_code' => 'sometimes|required|string|max:255|unique:users,referral_code,'.$user->id,
                 'role' => 'sometimes|required|string|in:affiliate,admin,user',
                 'profile_picture' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
                 'phone_number' => 'nullable|string|max:20',
@@ -463,6 +499,7 @@ class UserController extends Controller
             return response()->json($user);
         } catch (\Exception $e) {
             DB::rollBack();
+
             return response()->json(['error' => 'Failed to update user', 'message' => $e->getMessage()], 500);
         }
     }
@@ -482,6 +519,7 @@ class UserController extends Controller
             return response()->json(['message' => 'User deleted successfully']);
         } catch (\Exception $e) {
             DB::rollBack();
+
             return response()->json(['error' => 'Failed to delete user', 'message' => $e->getMessage()], 500);
         }
     }
@@ -502,6 +540,7 @@ class UserController extends Controller
             return response()->json(['message' => 'User restored successfully']);
         } catch (\Exception $e) {
             DB::rollBack();
+
             return response()->json(['error' => 'Failed to restore user', 'message' => $e->getMessage()], 500);
         }
     }

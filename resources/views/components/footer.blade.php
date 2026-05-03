@@ -1,5 +1,5 @@
 <footer class="bg-[#0b3a67] text-white dark:bg-slate-950 border-t border-white/10 dark:border-slate-800">
-    <div class="max-w-7xl mx-auto px-6 lg:px-8 py-12">
+    <div class="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 lg:py-12">
         <div class="grid md:grid-cols-3 gap-10">
 
             <div>
@@ -47,7 +47,7 @@
 
         </div>
 
-        <div class="mt-10 pt-6 border-t border-white/10 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div class="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-center dark:border-slate-800 md:flex-row md:text-left">
             <p class="text-sm text-gray-200 dark:text-slate-400">
                 &copy; {{ date('Y') }} TC Affiliates. All rights reserved.
             </p>

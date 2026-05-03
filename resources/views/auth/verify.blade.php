@@ -1,13 +1,13 @@
 @extends('layouts.app', ['title' => 'Verify Account'])
 
 @section('content')
-<section class="min-h-screen bg-[#f2f2f2] dark:bg-slate-950 px-4 py-12 flex items-center justify-center">
+<section class="flex min-h-screen items-center justify-center bg-[#f2f2f2] px-3 py-8 dark:bg-slate-950 sm:px-4 sm:py-12">
     <div class="w-full max-w-2xl bg-white dark:bg-slate-900 rounded-3xl shadow-2xl border border-gray-200 dark:border-slate-800 overflow-hidden">
 
-        <div class="bg-[#0b3a67] px-8 py-10 text-center text-white">
+        <div class="bg-[#0b3a67] px-5 py-8 text-center text-white sm:px-8 sm:py-10">
             <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="w-28 mx-auto mb-4">
 
-            <h1 class="text-3xl font-extrabold">
+            <h1 class="text-2xl font-extrabold sm:text-3xl">
                 Verify Your Account
             </h1>
 
@@ -16,7 +16,7 @@
             </p>
         </div>
 
-        <div class="p-8 lg:p-10">
+        <div class="p-5 sm:p-8 lg:p-10">
             @if(session('success'))
                 <div class="mb-5 rounded-xl bg-green-50 border border-green-200 px-4 py-3 text-green-700">
                     {{ session('success') }}
@@ -34,7 +34,7 @@
 
             <div class="mb-6 rounded-xl bg-gray-50 dark:bg-slate-950 border border-gray-200 dark:border-slate-800 px-4 py-3">
                 <p class="text-sm text-gray-500 dark:text-slate-400">Email</p>
-                <p class="font-semibold text-[#0b3a67] dark:text-white">
+                <p class="break-words font-semibold text-[#0b3a67] dark:text-white">
                     {{ request('email') ?? 'Enter your registered email below to resend token.' }}
                 </p>
             </div>
@@ -51,7 +51,7 @@
                         id="token"
                         maxlength="6"
                         inputmode="numeric"
-                        class="w-full rounded-xl border border-gray-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-4 py-3 text-center text-2xl tracking-[0.4em] font-bold focus:outline-none focus:ring-2 focus:ring-[#0b3a67]"
+                        class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 text-center text-xl font-bold tracking-[0.25em] focus:outline-none focus:ring-2 focus:ring-[#0b3a67] dark:border-slate-700 dark:bg-slate-950 sm:text-2xl sm:tracking-[0.4em]"
                         placeholder="000000"
                     >
                 </div>

@@ -26,7 +26,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-[#f2f2f2] text-gray-800 dark:bg-slate-950 dark:text-slate-100">
+<body class="overflow-x-hidden bg-[#f2f2f2] text-gray-800 dark:bg-slate-950 dark:text-slate-100">
 
     <section class="min-h-screen bg-[#f2f2f2] dark:bg-slate-950">
 
@@ -38,8 +38,8 @@
             <x-dashboard-sidebar />
 
             {{-- Main content --}}
-            <main class="w-full lg:ml-72">
-                <div class="px-4 py-6 sm:px-6 lg:px-10 lg:py-8">
+            <main class="min-w-0 w-full lg:ml-72">
+                <div class="px-3 py-5 sm:px-6 lg:px-10 lg:py-8">
                     {{ $slot }}
                 </div>
             </main>

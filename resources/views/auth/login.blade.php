@@ -1,9 +1,9 @@
 @extends('layouts.app', ['title' => 'Login'])
 
 @section('content')
-<section class="flex min-h-screen items-center justify-center bg-[#f2f2f2] px-4 py-12 dark:bg-slate-950">
+<section class="flex min-h-screen items-center justify-center bg-[#f2f2f2] px-3 py-8 dark:bg-slate-950 sm:px-4 sm:py-12">
 
-    <div class="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl dark:border-slate-800 dark:bg-slate-900">
+    <div class="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl dark:border-slate-800 dark:bg-slate-900 sm:p-8">
 
         <div class="mb-6 text-center">
             <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="mx-auto mb-4 w-28">
@@ -75,7 +75,7 @@
                 <p class="mt-2 text-sm text-red-600" data-error="password"></p>
             </div>
 
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
                 <label class="flex items-center gap-2 text-sm text-gray-500 dark:text-slate-400">
                     <input
                         type="checkbox"

@@ -29,7 +29,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
-<body class="bg-[#f2f2f2] text-gray-800 dark:bg-slate-950 dark:text-slate-100">
+<body class="overflow-x-hidden bg-[#f2f2f2] text-gray-800 dark:bg-slate-950 dark:text-slate-100">
 
     @include('components.header', ['title' => $title ?? 'TC Affiliates'])
 

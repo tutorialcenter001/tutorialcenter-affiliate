@@ -2,7 +2,7 @@
 
     <x-dashboard-header :user="$user" />
 
-    <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+    <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
         <div class="mb-6 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
                 <h1 class="text-2xl font-bold text-[#0b3a67] dark:text-white">
@@ -13,14 +13,14 @@
                 </p>
             </div>
 
-            <div class="rounded-xl bg-gray-50 px-4 py-3 dark:bg-slate-950">
+            <div class="w-full rounded-xl bg-gray-50 px-4 py-3 dark:bg-slate-950 sm:w-auto">
                 <p class="text-xs text-gray-500 dark:text-slate-400">Referral Code</p>
-                <p class="font-bold text-[#ed1c24]">{{ $user->referral_code }}</p>
+                <p class="break-all font-bold text-[#ed1c24]">{{ $user->referral_code }}</p>
             </div>
         </div>
 
         <div class="overflow-x-auto">
-            <table class="w-full text-left text-sm">
+            <table class="min-w-[54rem] w-full text-left text-sm">
                 <thead>
                     <tr class="border-b border-gray-200 text-gray-500 dark:border-slate-800 dark:text-slate-400">
                         <th class="py-3 pr-4">Name</th>

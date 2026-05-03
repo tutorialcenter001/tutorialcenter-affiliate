@@ -1,13 +1,13 @@
 @extends('layouts.app', ['title' => 'Register'])
 
 @section('content')
-<section class="min-h-screen bg-[#f2f2f2] px-4 py-12 dark:bg-slate-950">
+<section class="min-h-screen bg-[#f2f2f2] px-3 py-8 dark:bg-slate-950 sm:px-4 sm:py-12">
     <div class="mx-auto grid max-w-6xl overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900 lg:grid-cols-2">
 
-        <div class="flex flex-col justify-center bg-[#0b3a67] p-10 text-white lg:p-14">
-            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="mb-8 w-40">
+        <div class="flex flex-col justify-center bg-[#0b3a67] p-6 text-white sm:p-10 lg:p-14">
+            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="mb-8 w-32 sm:w-40">
 
-            <h1 class="mb-4 text-4xl font-extrabold lg:text-5xl">
+            <h1 class="mb-4 text-3xl font-extrabold sm:text-4xl lg:text-5xl">
                 Join <span class="text-[#ed1c24]">TC Affiliates</span>
             </h1>
 
@@ -23,8 +23,8 @@
             </ul>
         </div>
 
-        <div class="p-8 lg:p-12">
-            <h2 class="mb-2 text-3xl font-bold text-[#0b3a67] dark:text-white">
+        <div class="p-5 sm:p-8 lg:p-12">
+            <h2 class="mb-2 text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">
                 Create Account
             </h2>
 
