@@ -7,7 +7,9 @@ use App\Http\Requests\UpdateProfileRequest;
 use App\Mail\VerificationMail;
 use App\Models\AccountVerification;
 use App\Models\AffiliateEarning;
+use App\Models\Referral;
 use App\Models\User;
+use App\Models\Withdrawal;
 use Carbon\Carbon;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -242,14 +244,36 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
+        $totalReferrals = Referral::where('user_id', $user->id)->count();
+
+        $totalEarnings = AffiliateEarning::where('user_id', $user->id)->sum('amount');
+
+        $availableBalance = AffiliateEarning::where('user_id', $user->id)
+            ->where('status', 'approved')
+            ->sum('amount');
+
+        $totalWithdrawn = Withdrawal::where('user_id', $user->id)
+            ->whereIn('status', ['paid', 'approved'])
+            ->sum('amount');
+
+        $recentReferrals = Referral::where('user_id', $user->id)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        $recentWithdrawals = Withdrawal::where('user_id', $user->id)
+            ->latest()
+            ->take(5)
+            ->get();
+
         return view('dashboard', [
             'user' => $user,
-            'totalReferrals' => 0,
-            'totalEarnings' => 0,
-            'availableBalance' => 0,
-            'totalWithdrawn' => 0,
-            'recentReferrals' => [],
-            'recentWithdrawals' => [],
+            'totalReferrals' => $totalReferrals,
+            'totalEarnings' => $totalEarnings,
+            'availableBalance' => $availableBalance,
+            'totalWithdrawn' => $totalWithdrawn,
+            'recentReferrals' => $recentReferrals,
+            'recentWithdrawals' => $recentWithdrawals,
         ]);
     }
 

@@ -48,6 +48,57 @@
             </div>
 
             <div class="overflow-x-auto">
+                <table class="min-w-[54rem] w-full text-left text-sm">
+                    <thead>
+                        <tr class="border-b border-gray-200 text-gray-500 dark:border-slate-800 dark:text-slate-400">
+                            <th class="py-3 pr-4">Name</th>
+                            <th class="py-3 pr-4">Contact</th>
+                            <th class="py-3 pr-4">Referral Code</th>
+                            <th class="py-3 pr-4">Status</th>
+                            <th class="py-3">Referred At</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @forelse($recentReferrals as $referral)
+                        <tr class="border-b border-gray-100 dark:border-slate-800">
+                            <td class="py-4 pr-4 font-medium text-[#0b3a67] dark:text-white">
+                                {{ $referral->name ?? 'N/A' }}
+                            </td>
+
+                            <td class="py-4 pr-4 text-gray-500 dark:text-slate-400">
+                                {{ $referral->contact ?? 'N/A' }}
+                            </td>
+
+                            <td class="py-4 pr-4 font-semibold text-[#ed1c24]">
+                                {{ $referral->referral_code }}
+                            </td>
+
+                            <td class="py-4 pr-4">
+                                <span class="rounded-full px-3 py-1 text-xs font-semibold
+                                    {{ $referral->status === 'converted'
+                                        ? 'bg-green-100 text-green-700'
+                                        : 'bg-yellow-100 text-yellow-700' }}">
+                                    {{ ucfirst($referral->status) }}
+                                </span>
+                            </td>
+
+                            <td class="py-4 text-gray-500 dark:text-slate-400">
+                                {{ $referral->referred_at ? $referral->referred_at->format('d M, Y h:i A') : $referral->created_at->format('d M, Y h:i A') }}
+                            </td>
+                        </tr>
+                        @empty
+                        <tr>
+                            <td colspan="5" class="py-10 text-center text-gray-500 dark:text-slate-400">
+                                You do not have any referrals yet.
+                            </td>
+                        </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- <div class="overflow-x-auto">
                 <table class="min-w-[42rem] w-full text-left text-sm">
                     <thead>
                         <tr class="border-b border-gray-200 text-gray-500 dark:border-slate-800 dark:text-slate-400">
@@ -85,7 +136,7 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div>
+            </div> -->
         </div>
 
         {{-- Withdraw --}}
@@ -118,8 +169,7 @@
                         min="0"
                         step="0.01"
                         placeholder="Enter amount"
-                        class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 outline-none focus:border-[#0b3a67] focus:ring-2 focus:ring-[#0b3a67]/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white"
-                    >
+                        class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 outline-none focus:border-[#0b3a67] focus:ring-2 focus:ring-[#0b3a67]/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white">
                 </div>
 
                 <button type="submit"
