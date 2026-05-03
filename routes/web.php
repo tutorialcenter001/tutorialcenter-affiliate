@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ReferralController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -71,4 +72,14 @@ Route::middleware('guest')->group(function () {
 
     Route::post('/reset-password', [UserController::class, 'resetPassword'])
         ->name('password.update');
+});
+
+Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
+
+    Route::get('/referrals', [AdminController::class, 'referrals'])->name('referrals.index');
+
+    Route::get('/withdrawals', [AdminController::class, 'withdrawals'])->name('withdrawals.index');
+
+    Route::get('/pending-affiliates', [AdminController::class, 'pendingAffiliates'])->name('affiliates.pending');
 });

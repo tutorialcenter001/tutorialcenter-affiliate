@@ -23,6 +23,11 @@
 
     <div id="mobileDashboardMenu" class="hidden max-h-[calc(100vh-5rem)] overflow-y-auto pt-4">
         <nav class="space-y-2">
+            @if(auth()->user()->role === 'admin')
+            <a href="{{ route('admin.dashboard') }}" class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
+                Admin
+            </a>
+            @endif
             <a href="{{ route('dashboard') }}" class="block rounded-xl bg-[#0b3a67] px-4 py-3 text-sm font-semibold text-white">
                 Dashboard
             </a>

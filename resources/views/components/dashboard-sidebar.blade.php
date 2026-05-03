@@ -8,28 +8,34 @@
     </div>
 
     <nav class="flex-1 space-y-2 px-5 py-7">
+        @if(auth()->user()->role === 'admin')
+        <a href="{{ route('admin.dashboard') }}" class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
+            Admin
+        </a>
+        @endif
+
         <a href="{{ route('dashboard') }}"
-           class="block rounded-xl bg-white/10 px-4 py-3 font-semibold">
+            class="block rounded-xl bg-white/10 px-4 py-3 font-semibold">
             Dashboard
         </a>
 
         <a href="{{ route('referrals.index') }}"
-           class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
+            class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
             Referrals
         </a>
 
         <a href="{{ route('earnings.index') }}"
-           class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
+            class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
             Earnings
         </a>
 
         <a href="#"
-           class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
+            class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
             Withdrawals
         </a>
 
         <a href="{{ route('profile.show') }}"
-           class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
+            class="block rounded-xl px-4 py-3 text-gray-200 transition hover:bg-white/10">
             Profile
         </a>
     </nav>
