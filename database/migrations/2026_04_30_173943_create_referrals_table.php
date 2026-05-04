@@ -19,7 +19,7 @@ return new class extends Migration
                 ->cascadeOnDelete();
 
             $table->string('name')->nullable();
-            $table->string('contact')->nullable();
+            $table->string('contact')->unique()->nullable();
             $table->string('referral_code')->index();
             $table->string('status')->default('pending');
             $table->timestamp('referred_at')->nullable();

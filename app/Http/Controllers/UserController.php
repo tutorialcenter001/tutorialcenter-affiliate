@@ -538,58 +538,13 @@ class UserController extends Controller
             'bankAccounts' => $bankAccounts,
         ]);
     }
-    // public function withdrawals()
-    // {
-    //     $user = auth()->user();
-
-    //     $availableBalance = AffiliateEarning::where('user_id', $user->id)
-    //         ->where('status', 'approved')
-    //         ->sum('amount');
-
-    //     $totalWithdrawn = Withdrawal::where('user_id', $user->id)
-    //         ->whereIn('status', ['approved', 'paid'])
-    //         ->sum('amount');
-
-    //     $pendingWithdrawals = Withdrawal::where('user_id', $user->id)
-    //         ->where('status', 'pending')
-    //         ->sum('amount');
-
-    //     $withdrawals = Withdrawal::with('bankAccount')
-    //         ->where('user_id', $user->id)
-    //         ->latest()
-    //         ->paginate(10);
-
-    //     $bankAccounts = BankAccount::where('user_id', $user->id)
-    //         ->latest()
-    //         ->get();
-
-    //     return view('withdrawals.index', [
-    //         'user' => $user,
-    //         'availableBalance' => $availableBalance,
-    //         'totalWithdrawn' => $totalWithdrawn,
-    //         'pendingWithdrawals' => $pendingWithdrawals,
-    //         'withdrawals' => $withdrawals,
-    //         'bankAccounts' => $bankAccounts,
-    //     ]);
-    // }
 
     /**
      * Handle withdrawal request from user.
      */
-
     public function storeWithdrawal(Request $request)
     {
         $user = auth()->user();
-
-        // $availableBalance = AffiliateEarning::where('user_id', $user->id)
-        //     ->where('status', 'approved')
-        //     ->sum('amount');
-
-        // $pendingWithdrawals = Withdrawal::where('user_id', $user->id)
-        //     ->where('status', 'pending')
-        //     ->sum('amount');
-
-        // $withdrawableBalance = $availableBalance - $pendingWithdrawals;
 
         $availableBalance = AffiliateEarning::where('user_id', $user->id)
             ->where('status', 'approved')
@@ -607,14 +562,11 @@ class UserController extends Controller
                 'exists:bank_accounts,id',
             ],
             'amount' => [
-                // 'required',
-                // 'numeric',
-                // 'min:100',
-                // 'max:' . $withdrawableBalance,
                 'required',
                 'numeric',
                 'min:100',
                 'max:' . max($withdrawableBalance, 0),
+                // 'max:' . $withdrawableBalance,
             ],
         ], [
             'amount.max' => 'You cannot request more than your available balance of ₦' . number_format($withdrawableBalance, 2) . '.',
@@ -647,71 +599,7 @@ class UserController extends Controller
             ->route('withdrawals.index')
             ->with('success', 'Withdrawal request submitted successfully.');
     }
-    // public function storeWithdrawal(Request $request)
-    // {
-    //     $user = auth()->user();
 
-    //     $validator = Validator::make($request->all(), [
-    //         'amount' => 'required|numeric|min:100',
-    //         'bank_account_id' => 'required|exists:bank_accounts,id',
-    //     ]);
-
-    //     if ($validator->fails()) {
-    //         return back()
-    //             ->withErrors($validator)
-    //             ->withInput();
-    //     }
-
-    //     $bankAccount = BankAccount::where('id', $request->bank_account_id)
-    //         ->where('user_id', $user->id)
-    //         ->first();
-
-    //     if (! $bankAccount) {
-    //         return back()
-    //             ->withErrors(['bank_account_id' => 'Invalid bank account selected.'])
-    //             ->withInput();
-    //     }
-
-    //     $availableBalance = AffiliateEarning::where('user_id', $user->id)
-    //         ->where('status', 'approved')
-    //         ->sum('amount');
-
-    //     $pendingWithdrawals = Withdrawal::where('user_id', $user->id)
-    //         ->where('status', 'pending')
-    //         ->sum('amount');
-
-    //     $withdrawableBalance = $availableBalance - $pendingWithdrawals;
-
-    //     if ($request->amount > $withdrawableBalance) {
-    //         return back()
-    //             ->withErrors(['amount' => 'Insufficient withdrawable balance.'])
-    //             ->withInput();
-    //     }
-
-    //     DB::beginTransaction();
-
-    //     try {
-    //         Withdrawal::create([
-    //             'user_id' => $user->id,
-    //             'bank_account_id' => $bankAccount->id,
-    //             'amount' => $request->amount,
-    //             'status' => 'pending',
-    //             'payment_method' => 'bank_transfer',
-    //         ]);
-
-    //         DB::commit();
-
-    //         return redirect()
-    //             ->route('withdrawals.index')
-    //             ->with('success', 'Withdrawal request submitted successfully.');
-    //     } catch (\Exception $e) {
-    //         DB::rollBack();
-
-    //         return back()
-    //             ->withErrors(['amount' => 'Unable to submit withdrawal request. Please try again.'])
-    //             ->withInput();
-    //     }
-    // }
 
 
 
