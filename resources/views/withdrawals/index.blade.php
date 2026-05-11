@@ -107,7 +107,7 @@
                         type="number"
                         name="amount"
                         min="100"
-                        max="{{ $withdrawableBalance }}"
+                        max="{{ $availableBalance - $totalWithdrawn }}"
                         step="0.01"
                         value="{{ old('amount') }}"
                         placeholder="Enter amount"
