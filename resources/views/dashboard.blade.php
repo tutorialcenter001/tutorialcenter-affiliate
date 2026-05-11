@@ -34,10 +34,12 @@
     </div>
 
     {{-- Main Grid --}}
-    <div class="mt-8 grid gap-6 xl:grid-cols-3">
+    <!-- <div class="mt-8 grid gap-6 xl:grid-cols-3"> -->
+        <div class="mt-8 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
 
         {{-- Referral Activity --}}
-        <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6 xl:col-span-2">
+        <!-- <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6 xl:col-span-2"> -->
+    
             <div class="mb-5">
                 <h2 class="text-xl font-bold text-[#0b3a67] dark:text-white">
                     Recent Referral Activity
@@ -96,7 +98,7 @@
                         @endforelse
                     </tbody>
                 </table>
-            </div>
+            <!-- </div> -->
 
             <!-- <div class="overflow-x-auto">
                 <table class="min-w-[42rem] w-full text-left text-sm">
