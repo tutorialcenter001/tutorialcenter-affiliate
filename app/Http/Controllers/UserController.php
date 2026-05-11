@@ -518,7 +518,8 @@ class UserController extends Controller
             ->whereIn('status', ['pending', 'approved', 'paid'])
             ->sum('amount');
 
-        $withdrawableBalance = $availableBalance - $totalRequestedWithdrawals;
+        // $withdrawableBalance = $availableBalance - $totalRequestedWithdrawals;
+        $withdrawableBalance = $availableBalance - $totalWithdrawn;
 
         $withdrawals = Withdrawal::with('bankAccount')
             ->where('user_id', $user->id)
