@@ -494,6 +494,10 @@ class UserController extends Controller
     {
         $user = auth()->user();
 
+        // $availableBalance = AffiliateEarning::where('user_id', $user->id)
+        //     ->where('status', 'approved')
+        //     ->sum('amount');
+
         $availableBalance = AffiliateEarning::where('user_id', $user->id)
             ->where('status', 'approved')
             ->sum('amount');
@@ -510,8 +514,12 @@ class UserController extends Controller
             ->where('status', 'paid')
             ->sum('amount');
 
+        // $totalWithdrawn = Withdrawal::where('user_id', $user->id)
+        //     ->whereIn('status', ['approved', 'paid'])
+        //     ->sum('amount');
+
         $totalWithdrawn = Withdrawal::where('user_id', $user->id)
-            ->whereIn('status', ['approved', 'paid'])
+            ->whereIn('status', ['paid', 'approved'])
             ->sum('amount');
 
         $totalRequestedWithdrawals = Withdrawal::where('user_id', $user->id)
@@ -537,7 +545,8 @@ class UserController extends Controller
             'approvedWithdrawals' => $approvedWithdrawals,
             'paidWithdrawals' => $paidWithdrawals,
             'totalWithdrawn' => $totalWithdrawn,
-            'withdrawableBalance' => max($withdrawableBalance, 0),
+            // 'withdrawableBalance' => max($withdrawableBalance, 0),
+            'withdrawableBalance' => $withdrawableBalance,
             'withdrawals' => $withdrawals,
             'bankAccounts' => $bankAccounts,
         ]);
