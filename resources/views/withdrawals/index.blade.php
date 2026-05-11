@@ -36,7 +36,8 @@
         <div class="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <p class="text-sm text-gray-500 dark:text-slate-400">Withdrawable Balance</p>
             <h2 class="mt-2 break-words text-3xl font-bold text-[#ed1c24]">
-                ₦{{ number_format($withdrawableBalance, 2) }}
+                <!-- ₦{{ number_format($withdrawableBalance, 2) }} -->
+                ₦{{ number_format($availableBalance - $totalWithdrawn, 2) }}
             </h2>
         </div>
 
