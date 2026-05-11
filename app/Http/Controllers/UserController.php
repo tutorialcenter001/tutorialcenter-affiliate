@@ -75,7 +75,7 @@ class UserController extends Controller
             $user->surname = $request->surname;
             $user->email = $request->email;
             $user->password = Hash::make($request->password);
-            $user->referral_code = $request->referral_code;
+            $user->referral_code = strtolower($request->referral_code);
             $user->role = $request->role;
             $user->phone_number = $request->phone_number;
 

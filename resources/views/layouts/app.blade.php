@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="{{ asset('images/tc-icon.png') }}" type="image/x-icon"/>
+
     <script>
         const savedTheme = localStorage.getItem('theme');
 
