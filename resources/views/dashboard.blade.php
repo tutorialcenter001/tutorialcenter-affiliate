@@ -21,7 +21,8 @@
         <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <p class="text-sm text-gray-500 dark:text-slate-400">Available Balance</p>
             <h2 class="mt-2 break-words text-2xl font-bold text-[#ed1c24] sm:text-3xl">
-                ₦{{ number_format($availableBalance, 2) }}
+                <!-- ₦{{ number_format($availableBalance, 2) }} -->
+                ₦{{ number_format($newAvailableBalance, 2) }}
             </h2>
         </div>
 

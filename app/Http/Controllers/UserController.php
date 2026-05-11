@@ -266,15 +266,18 @@ class UserController extends Controller
             ->latest()
             ->take(5)
             ->get();
+        
+        $newAvailableBalance = $availableBalance - $totalWithdrawn;
 
         return view('dashboard', [
             'user' => $user,
-            'totalReferrals' => $totalReferrals,
             'totalEarnings' => $totalEarnings,
-            'availableBalance' => $availableBalance,
+            'totalReferrals' => $totalReferrals,
             'totalWithdrawn' => $totalWithdrawn,
             'recentReferrals' => $recentReferrals,
+            'availableBalance' => $availableBalance,
             'recentWithdrawals' => $recentWithdrawals,
+            'newAvailableBalance' => $newAvailableBalance,
         ]);
     }
 
