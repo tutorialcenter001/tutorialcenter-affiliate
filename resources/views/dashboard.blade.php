@@ -140,7 +140,7 @@
         </div>
 
         {{-- Withdraw --}}
-        <div id="withdraw" class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
+        <!-- <div id="withdraw" class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
             <h2 class="text-xl font-bold text-[#0b3a67] dark:text-white">
                 Withdraw Funds
             </h2>
@@ -177,7 +177,7 @@
                     Request Withdrawal
                 </button>
             </form>
-        </div>
+        </div> -->
     </div>
 
     {{-- Account Details --}}
