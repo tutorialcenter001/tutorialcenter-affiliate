@@ -121,7 +121,7 @@
                             Minimum withdrawal: ₦100.00
                         </p> -->
                     <p class="mt-2 text-xs text-gray-500 dark:text-slate-400">
-                        Minimum withdrawal: ₦100.00. Maximum available: ₦{{ number_format($withdrawableBalance, 2) }}.
+                        Minimum withdrawal: ₦100.00. Maximum available: ₦{{ number_format($availableBalance - $totalWithdrawn, 2) }}.
                     </p>
                 </div>
 
