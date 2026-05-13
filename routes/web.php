@@ -89,6 +89,8 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 
     Route::get('/referrals', [AdminController::class, 'referrals'])->name('referrals.index');
 
+    Route::get('/referrals/export', [AdminController::class, 'exportReferrals'])->name('referrals.export');
+
     Route::get('/withdrawals', [AdminController::class, 'withdrawals'])->name('withdrawals.index');
 
     Route::patch('/withdrawals/{withdrawal}/approve', [AdminController::class, 'approveWithdrawal'])

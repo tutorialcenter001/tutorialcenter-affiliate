@@ -262,12 +262,108 @@ class AdminController extends Controller
     {
         $this->authorizeAdmin();
 
+        $query = Referral::with('user');
+
+        /*
+        |--------------------------------------------------------------------------
+        | Search
+        |--------------------------------------------------------------------------
+        */
+        if (request('search')) {
+
+            $search = trim(request('search'));
+
+            $query->where(function ($q) use ($search) {
+
+                $q->where('name', 'like', "%{$search}%")
+                    ->orWhere('contact', 'like', "%{$search}%")
+                    ->orWhere('referral_code', 'like', "%{$search}%")
+                    ->orWhereHas('user', function ($userQuery) use ($search) {
+
+                        $userQuery->where('firstname', 'like', "%{$search}%")
+                            ->orWhere('surname', 'like', "%{$search}%")
+                            ->orWhere('email', 'like', "%{$search}%");
+                    });
+            });
+        }
+
+        /*
+        |--------------------------------------------------------------------------
+        | Filters
+        |--------------------------------------------------------------------------
+        */
+        if (request('status')) {
+
+            $query->where('status', request('status'));
+        }
+
+        $referrals = $query
+            ->latest()
+            ->paginate(20)
+            ->withQueryString();
+
         return view('admin.referrals.index', [
-            'referrals' => Referral::with('user')
-                ->latest()
-                ->paginate(20),
+            'referrals' => $referrals,
         ]);
     }
+
+    public function exportReferrals()
+    {
+        $this->authorizeAdmin();
+
+        $filename = 'referrals-' . now()->format('Y-m-d-H-i-s') . '.csv';
+
+        $headers = [
+            'Content-Type' => 'text/csv',
+            'Content-Disposition' => "attachment; filename={$filename}",
+        ];
+
+        $callback = function () {
+
+            $file = fopen('php://output', 'w');
+
+            fputcsv($file, [
+                'Referral Name',
+                'Contact',
+                'Affiliate',
+                'Referral Code',
+                'Status',
+                'Date',
+            ]);
+
+            $referrals = Referral::with('user')
+                ->latest()
+                ->get();
+
+            foreach ($referrals as $referral) {
+
+                fputcsv($file, [
+                    $referral->name,
+                    $referral->contact,
+                    ($referral->user->firstname ?? '') . ' ' .
+                        ($referral->user->surname ?? ''),
+                    $referral->referral_code,
+                    ucfirst($referral->status),
+                    $referral->created_at->format('d M, Y'),
+                ]);
+            }
+
+            fclose($file);
+        };
+
+        return response()->stream($callback, 200, $headers);
+    }
+
+    // public function referrals()
+    // {
+    //     $this->authorizeAdmin();
+
+    //     return view('admin.referrals.index', [
+    //         'referrals' => Referral::with('user')
+    //             ->latest()
+    //             ->paginate(20),
+    //     ]);
+    // }
 
     public function withdrawals()
     {
