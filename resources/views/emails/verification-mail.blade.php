@@ -98,6 +98,10 @@
                                 If you did not create this account, please ignore this email.
                             </p>
 
+                            <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.7; color: #333333;">
+                                Please note that if you don't verify your email within 24 hours, your account may be deleted and will require you to create a new one.
+                            </p>
+
                             <p style="margin: 0; font-size: 15px; line-height: 1.7; color: #333333;">
                                 Best regards,<br>
                                 <strong>The TC Affiliates Team</strong><br>

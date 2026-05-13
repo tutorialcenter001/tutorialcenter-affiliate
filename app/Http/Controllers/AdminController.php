@@ -105,7 +105,7 @@ class AdminController extends Controller
 
             $users->setCollection(
                 $users->getCollection()->filter(function ($user) {
-                    return $user->total_earnings >= 100000;
+                    return $user->total_earnings >= 1000;
                 })
             );
         }
