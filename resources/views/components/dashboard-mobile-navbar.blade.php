@@ -43,14 +43,6 @@
                 Users Analytics
             </a>
 
-            <!-- <a href="{{ route('admin.referrals.index') }}"
-                class="block rounded-xl px-4 py-3 text-sm font-semibold transition
-                {{ request()->routeIs('admin.referrals.*')
-                    ? 'bg-[#0b3a67] text-white'
-                    : 'text-[#0b3a67] hover:bg-gray-100 dark:text-white dark:hover:bg-slate-800' }}">
-                All Referrals
-            </a> -->
-
             <a href="{{ route('admin.withdrawals.index') }}"
                 class="block rounded-xl px-4 py-3 text-sm font-semibold transition
                 {{ request()->routeIs('admin.withdrawals.*')

@@ -10,6 +10,61 @@
         </p>
     </div>
 
+    {{-- Analytics Summary Cards --}}
+    <div class="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-5">
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="text-sm text-gray-500 dark:text-slate-400">
+                Total Referrals
+            </p>
+
+            <h3 class="mt-2 text-2xl font-extrabold text-[#0b3a67] dark:text-white">
+                {{ number_format($users->sum('total_referrals')) }}
+            </h3>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="text-sm text-gray-500 dark:text-slate-400">
+                Total Earnings
+            </p>
+
+            <h3 class="mt-2 text-2xl font-extrabold text-green-600">
+                ₦{{ number_format($users->sum('total_earnings'), 2) }}
+            </h3>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="text-sm text-gray-500 dark:text-slate-400">
+                Pending Earnings
+            </p>
+
+            <h3 class="mt-2 text-2xl font-extrabold text-yellow-600">
+                ₦{{ number_format($users->sum('pending_earnings'), 2) }}
+            </h3>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="text-sm text-gray-500 dark:text-slate-400">
+                Total Paid Out
+            </p>
+
+            <h3 class="mt-2 text-2xl font-extrabold text-blue-600">
+                ₦{{ number_format($users->sum('paid_withdrawals'), 2) }}
+            </h3>
+        </div>
+
+        <div class="rounded-2xl border border-gray-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <p class="text-sm text-gray-500 dark:text-slate-400">
+                Total Balance
+            </p>
+
+            <h3 class="mt-2 text-2xl font-extrabold text-[#ed1c24]">
+                ₦{{ number_format($users->sum('available_balance'), 2) }}
+            </h3>
+        </div>
+
+    </div>
+
     <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
 
         {{-- Mobile View --}}
