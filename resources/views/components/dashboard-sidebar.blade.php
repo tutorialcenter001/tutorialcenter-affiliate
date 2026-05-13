@@ -18,6 +18,14 @@
             Overview
         </a>
 
+        <a href="{{ route('admin.users.index') }}"
+            class="block rounded-xl px-4 py-3 transition
+            {{ request()->routeIs('admin.users.*') 
+                ? 'bg-white/10 font-semibold text-white' 
+                : 'text-gray-200 hover:bg-white/10' }}">
+            Users Analytics
+        </a>
+
         <a href="{{ route('admin.referrals.index') }}"
             class="block rounded-xl px-4 py-3 transition
             {{ request()->routeIs('admin.referrals.*') 

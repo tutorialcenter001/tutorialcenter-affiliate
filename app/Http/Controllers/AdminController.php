@@ -16,6 +16,65 @@ class AdminController extends Controller
         }
     }
 
+    public function users()
+    {
+        $this->authorizeAdmin();
+
+        $users = User::with([
+            'referrals',
+            'affiliateEarnings',
+            'withdrawals',
+        ])
+            ->where('role', 'affiliate')
+            ->latest()
+            ->paginate(20);
+
+        $users->getCollection()->transform(function ($user) {
+
+            $totalReferrals = $user->referrals->count();
+
+            $totalEarnings = $user->affiliateEarnings
+                ->sum('amount');
+
+            $approvedEarnings = $user->affiliateEarnings
+                ->where('status', 'approved')
+                ->sum('amount');
+
+            $pendingEarnings = $user->affiliateEarnings
+                ->where('status', 'pending')
+                ->sum('amount');
+
+            $paidWithdrawals = $user->withdrawals
+                ->whereIn('status', ['approved', 'paid'])
+                ->sum('amount');
+
+            $pendingWithdrawals = $user->withdrawals
+                ->where('status', 'pending')
+                ->sum('amount');
+
+            $availableBalance = max(
+                $approvedEarnings - (
+                    $paidWithdrawals + $pendingWithdrawals
+                ),
+                0
+            );
+
+            $user->total_referrals = $totalReferrals;
+            $user->total_earnings = $totalEarnings;
+            $user->approved_earnings = $approvedEarnings;
+            $user->pending_earnings = $pendingEarnings;
+            $user->paid_withdrawals = $paidWithdrawals;
+            $user->pending_withdrawals = $pendingWithdrawals;
+            $user->available_balance = $availableBalance;
+
+            return $user;
+        });
+
+        return view('admin.users.index', [
+            'users' => $users,
+        ]);
+    }
+
     public function dashboard()
     {
         $this->authorizeAdmin();

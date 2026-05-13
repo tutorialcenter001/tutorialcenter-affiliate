@@ -81,6 +81,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/users', [AdminController::class, 'users'])->name('users.index');
+    
     Route::get('/dashboard', [AdminController::class, 'dashboard'])->name('dashboard');
 
     Route::get('/referrals', [AdminController::class, 'referrals'])->name('referrals.index');
