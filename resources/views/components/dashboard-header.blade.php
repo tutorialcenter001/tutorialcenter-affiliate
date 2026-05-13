@@ -39,7 +39,7 @@
                 </div>
             </div>
 
-            <a href="#withdraw"
+            <a href="{{ route('withdrawals.index') }}"
                class="w-full rounded-xl bg-[#ed1c24] px-5 py-3 text-center text-sm font-semibold text-white transition hover:opacity-90 sm:w-auto">
                 Withdraw Funds
             </a>
