@@ -65,6 +65,67 @@
 
     </div>
 
+    {{-- Filters & Actions --}}
+    <div class="mb-6 flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+
+        <form method="GET" action="{{ route('admin.users.index') }}"
+            class="flex flex-1 flex-col gap-3 sm:flex-row">
+
+            {{-- Search --}}
+            <div class="flex-1">
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ request('search') }}"
+                    placeholder="Search by name, email or referral code..."
+                    class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 shadow-sm outline-none transition focus:border-[#0b3a67] focus:ring-2 focus:ring-[#0b3a67]/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white">
+            </div>
+
+            {{-- Filter --}}
+            <div class="sm:w-56">
+                <select
+                    name="filter"
+                    class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 shadow-sm outline-none transition focus:border-[#0b3a67] focus:ring-2 focus:ring-[#0b3a67]/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white">
+
+                    <option value="">
+                        All Users
+                    </option>
+
+                    <option value="high_earners"
+                        {{ request('filter') === 'high_earners' ? 'selected' : '' }}>
+                        High Earners
+                    </option>
+
+                    <option value="pending_withdrawals"
+                        {{ request('filter') === 'pending_withdrawals' ? 'selected' : '' }}>
+                        Pending Withdrawals
+                    </option>
+
+                    <option value="low_balance"
+                        {{ request('filter') === 'low_balance' ? 'selected' : '' }}>
+                        Low Balance
+                    </option>
+
+                </select>
+            </div>
+
+            {{-- Submit --}}
+            <button
+                type="submit"
+                class="rounded-2xl bg-[#0b3a67] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90">
+                Filter
+            </button>
+
+        </form>
+
+        {{-- Export Button --}}
+        <a href="{{ route('admin.users.export', request()->query()) }}"
+            class="inline-flex items-center justify-center rounded-2xl bg-[#ed1c24] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-90">
+            Export CSV
+        </a>
+
+    </div>
+
     <div class="rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:p-6">
 
         {{-- Mobile View --}}
