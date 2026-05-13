@@ -8,75 +8,77 @@
 
     <nav class="flex-1 space-y-2 px-5 py-7">
 
-        @if(auth()->user()->role === 'admin')
+    @if(auth()->user()->role === 'admin')
 
         <a href="{{ route('admin.dashboard') }}"
             class="block rounded-xl px-4 py-3 transition
-            {{ request()->routeIs('admin.dashboard') 
-                ? 'bg-white/10 font-semibold text-white' 
+            {{ request()->routeIs('admin.dashboard')
+                ? 'bg-white/10 font-semibold text-white'
                 : 'text-gray-200 hover:bg-white/10' }}">
             Overview
         </a>
 
         <a href="{{ route('admin.users.index') }}"
             class="block rounded-xl px-4 py-3 transition
-            {{ request()->routeIs('admin.users.*') 
-                ? 'bg-white/10 font-semibold text-white' 
+            {{ request()->routeIs('admin.users.*')
+                ? 'bg-white/10 font-semibold text-white'
                 : 'text-gray-200 hover:bg-white/10' }}">
             Users Analytics
         </a>
 
         <a href="{{ route('admin.withdrawals.index') }}"
             class="block rounded-xl px-4 py-3 transition
-            {{ request()->routeIs('admin.withdrawals.*') 
-                ? 'bg-white/10 font-semibold text-white' 
+            {{ request()->routeIs('admin.withdrawals.*')
+                ? 'bg-white/10 font-semibold text-white'
                 : 'text-gray-200 hover:bg-white/10' }}">
             Withdrawals Request
         </a>
-
-        @endif
+    
+    @elseif(auth()->user()->role === 'affiliate')
 
         <a href="{{ route('dashboard') }}"
             class="block rounded-xl px-4 py-3 transition
-            {{ request()->routeIs('dashboard') 
-                ? 'bg-white/10 font-semibold text-white' 
+            {{ request()->routeIs('dashboard')
+                ? 'bg-white/10 font-semibold text-white'
                 : 'text-gray-200 hover:bg-white/10' }}">
             Dashboard
         </a>
 
         <a href="{{ route('referrals.index') }}"
             class="block rounded-xl px-4 py-3 transition
-            {{ request()->routeIs('referrals.*') 
-                ? 'bg-white/10 font-semibold text-white' 
+            {{ request()->routeIs('referrals.*')
+                ? 'bg-white/10 font-semibold text-white'
                 : 'text-gray-200 hover:bg-white/10' }}">
             Referrals
         </a>
 
         <a href="{{ route('earnings.index') }}"
             class="block rounded-xl px-4 py-3 transition
-            {{ request()->routeIs('earnings.*') 
-                ? 'bg-white/10 font-semibold text-white' 
+            {{ request()->routeIs('earnings.*')
+                ? 'bg-white/10 font-semibold text-white'
                 : 'text-gray-200 hover:bg-white/10' }}">
             Earnings
         </a>
 
         <a href="{{ route('withdrawals.index') }}"
             class="block rounded-xl px-4 py-3 transition
-            {{ request()->routeIs('withdrawals.*') 
-                ? 'bg-white/10 font-semibold text-white' 
+            {{ request()->routeIs('withdrawals.*')
+                ? 'bg-white/10 font-semibold text-white'
                 : 'text-gray-200 hover:bg-white/10' }}">
             Withdrawals
         </a>
 
-        <a href="{{ route('profile.show') }}"
-            class="block rounded-xl px-4 py-3 transition
-            {{ request()->routeIs('profile.*') 
-                ? 'bg-white/10 font-semibold text-white' 
-                : 'text-gray-200 hover:bg-white/10' }}">
-            Profile
-        </a>
+    @endif
 
-    </nav>
+    <a href="{{ route('profile.show') }}"
+        class="block rounded-xl px-4 py-3 transition
+        {{ request()->routeIs('profile.*')
+            ? 'bg-white/10 font-semibold text-white'
+            : 'text-gray-200 hover:bg-white/10' }}">
+        Profile
+    </a>
+
+</nav>
 
     <div class="border-t border-white/10 p-5">
         <form method="POST" action="{{ route('logout') }}">

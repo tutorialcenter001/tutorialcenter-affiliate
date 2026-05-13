@@ -24,7 +24,6 @@
 
     <div id="mobileDashboardMenu" class="hidden max-h-[calc(100vh-5rem)] overflow-y-auto pt-4">
         <nav class="space-y-2">
-
             @if(auth()->user()->role === 'admin')
 
             <a href="{{ route('admin.dashboard') }}"
@@ -36,10 +35,10 @@
             </a>
 
             <a href="{{ route('admin.users.index') }}"
-                class="block rounded-xl px-4 py-3 transition
-            {{ request()->routeIs('admin.users.*') 
-                ? 'bg-white/10 font-semibold text-white' 
-                : 'text-gray-200 hover:bg-white/10' }}">
+                class="block rounded-xl px-4 py-3 text-sm font-semibold transition
+                {{ request()->routeIs('admin.users.*')
+                    ? 'bg-[#0b3a67] text-white'
+                    : 'text-[#0b3a67] hover:bg-gray-100 dark:text-white dark:hover:bg-slate-800' }}">
                 Users Analytics
             </a>
 
@@ -51,7 +50,7 @@
                 All Withdrawals Request
             </a>
 
-            @endif
+            @elseif(auth()->user()->role === 'affiliate')
 
             <a href="{{ route('dashboard') }}"
                 class="block rounded-xl px-4 py-3 text-sm font-semibold transition
@@ -84,6 +83,7 @@
                     : 'text-[#0b3a67] hover:bg-gray-100 dark:text-white dark:hover:bg-slate-800' }}">
                 Withdrawals
             </a>
+            @endif
 
             <a href="{{ route('profile.show') }}"
                 class="block rounded-xl px-4 py-3 text-sm font-semibold transition
