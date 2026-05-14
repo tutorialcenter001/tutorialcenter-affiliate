@@ -31,7 +31,7 @@
             {{ request()->routeIs('admin.withdrawals.*')
                 ? 'bg-white/10 font-semibold text-white'
                 : 'text-gray-200 hover:bg-white/10' }}">
-            Withdrawals Request
+            Withdrawals
         </a>
 
         <a href="{{ route('admin.referrals.index') }}"
