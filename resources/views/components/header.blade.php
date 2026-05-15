@@ -14,7 +14,7 @@
 
             <div class="min-w-0 flex items-center gap-4">
                 <a href="{{ route('welcome') }}" class="flex shrink-0 items-center gap-3">
-                    <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="h-10 w-auto">
+                    <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="h-10 w-auto rounded">
                 </a>
 
                 <div class="hidden min-w-0 sm:block">

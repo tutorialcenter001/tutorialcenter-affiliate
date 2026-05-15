@@ -6,7 +6,7 @@
     <div class="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-6 shadow-2xl dark:border-slate-800 dark:bg-slate-900 sm:p-8">
 
         <div class="mb-6 text-center">
-            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="mx-auto mb-4 w-28">
+            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="mx-auto mb-4 w-28 rounded">
 
             <h2 class="text-3xl font-bold text-[#0b3a67] dark:text-white">
                 Login

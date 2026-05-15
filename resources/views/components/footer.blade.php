@@ -3,7 +3,7 @@
         <div class="grid md:grid-cols-3 gap-10">
 
             <div>
-                <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="h-14 w-auto mb-4">
+                <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="h-14 w-auto mb-4 rounded">
                 <h2 class="text-xl font-bold">TC Affiliates</h2>
                 <p class="mt-3 text-sm text-gray-200 dark:text-slate-400 leading-relaxed">
                     Grow with TC by sharing your referral code, tracking your account growth,

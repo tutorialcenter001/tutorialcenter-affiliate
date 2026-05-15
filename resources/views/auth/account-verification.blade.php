@@ -5,7 +5,7 @@
     <div class="w-full max-w-xl overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900">
 
         <div class="bg-[#0b3a67] px-5 py-8 text-center text-white sm:px-8 sm:py-10">
-            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="mx-auto mb-4 w-28">
+            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="mx-auto mb-4 w-28 rounded">
             <h1 class="text-2xl font-extrabold sm:text-3xl">Account Verification</h1>
         </div>
 

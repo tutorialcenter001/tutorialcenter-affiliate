@@ -5,7 +5,7 @@
     <div class="mx-auto grid max-w-6xl overflow-hidden rounded-3xl border border-gray-200 bg-white shadow-2xl dark:border-slate-800 dark:bg-slate-900 lg:grid-cols-2">
 
         <div class="flex flex-col justify-center bg-[#0b3a67] p-6 text-white sm:p-10 lg:p-14">
-            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="mb-8 w-32 sm:w-40">
+            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="mb-8 w-32 sm:w-40 rounded">
 
             <h1 class="mb-4 text-3xl font-extrabold sm:text-4xl lg:text-5xl">
                 Join <span class="text-[#ed1c24]">TC Affiliates</span>
