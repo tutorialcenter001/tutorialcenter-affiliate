@@ -1,7 +1,7 @@
 <div class="sticky top-0 z-50 border-b border-gray-200 bg-white px-3 py-3 shadow-sm dark:border-slate-800 dark:bg-slate-900 sm:px-4 lg:hidden">
     <div class="flex items-center justify-between">
         <div class="min-w-0 flex items-center gap-3">
-            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="h-10 w-auto shrink-0">
+            <img src="{{ asset('images/tc-logo.png') }}" alt="TC Logo" class="h-10 w-auto shrink-0 rounded">
 
             <div class="min-w-0">
                 <h1 class="truncate text-sm font-bold text-[#0b3a67] dark:text-white">
