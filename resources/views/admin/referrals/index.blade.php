@@ -29,7 +29,7 @@
             <div class="sm:w-52">
                 <select
                     name="status"
-                    class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-3 text-sm text-gray-700 shadow-sm outline-none transition focus:border-[#0b3a67] focus:ring-2 focus:ring-[#0b3a67]/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white">
+                    class="w-full rounded-2xl border border-gray-200 bg-white px-4 py-4 text-sm text-gray-700 shadow-sm outline-none transition focus:border-[#0b3a67] focus:ring-2 focus:ring-[#0b3a67]/20 dark:border-slate-700 dark:bg-slate-900 dark:text-white">
 
                     <option value="">
                         All Statuses
