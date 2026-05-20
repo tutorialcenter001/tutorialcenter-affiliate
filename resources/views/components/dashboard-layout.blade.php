@@ -13,6 +13,7 @@
             document.documentElement.classList.add('dark');
         }
     </script>
+    <link rel="shortcut icon" href="{{ asset('images/tc-icon.png') }}" type="image/x-icon"/>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
