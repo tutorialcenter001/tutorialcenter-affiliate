@@ -51,18 +51,18 @@
             <div class="grid gap-4 sm:grid-cols-2">
                 <div class="rounded-2xl bg-white p-4 dark:bg-slate-800 sm:p-5">
                     <p class="text-sm text-gray-500 dark:text-slate-400">Referrals</p>
-                    <h3 class="text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">0</h3>
+                    <h3 class="text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">1,234</h3>
                 </div>
 
                 <div class="rounded-2xl bg-white p-4 dark:bg-slate-800 sm:p-5">
                     <p class="text-sm text-gray-500 dark:text-slate-400">Earnings</p>
-                    <h3 class="text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">₦0</h3>
+                    <h3 class="text-2xl font-bold text-[#0b3a67] dark:text-white sm:text-3xl">₦617,000</h3>
                 </div>
             </div>
 
             <div class="mt-6 rounded-2xl bg-white/10 p-4 sm:p-5">
                 <p class="text-sm text-gray-200">Available Balance</p>
-                <h3 class="mt-2 break-words text-3xl font-extrabold sm:text-4xl">₦0.00</h3>
+                <h3 class="mt-2 break-words text-3xl font-extrabold sm:text-4xl">₦500,000.00</h3>
             </div>
         </div>
 
@@ -129,7 +129,7 @@
         <div class="rounded-3xl border border-gray-200 bg-[#f2f2f2] p-4 dark:border-slate-800 dark:bg-slate-950 sm:p-8">
             <div class="rounded-2xl bg-white p-4 dark:bg-slate-900 sm:p-6">
                 <p class="text-gray-500">Affiliate Balance</p>
-                <h3 class="mt-3 break-words text-4xl font-bold text-[#0b3a67] dark:text-white sm:text-5xl">₦0.00</h3>
+                <h3 class="mt-3 break-words text-4xl font-bold text-[#0b3a67] dark:text-white sm:text-5xl">₦500,000.00</h3>
 
                 <button class="mt-6 w-full bg-[#ed1c24] text-white py-3 rounded-xl">
                     Request Withdrawal

@@ -469,36 +469,34 @@
             setLoading(false);
         }
     });
-
-    
 </script>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
+    document.addEventListener('DOMContentLoaded', () => {
 
-    const modal = document.getElementById('registrationNotice');
-    const closeBtn = document.getElementById('closeRegistrationNotice');
+        const modal = document.getElementById('registrationNotice');
+        const closeBtn = document.getElementById('closeRegistrationNotice');
 
-    if (!sessionStorage.getItem('registrationNoticeSeen')) {
+        if (!sessionStorage.getItem('registrationNoticeSeen')) {
 
-        modal.classList.remove('hidden');
+            modal.classList.remove('hidden');
 
-    } else {
+        } else {
 
-        modal.classList.add('hidden');
-    }
+            modal.classList.add('hidden');
+        }
 
-    closeBtn.addEventListener('click', () => {
+        closeBtn.addEventListener('click', () => {
 
-        modal.classList.add('hidden');
+            modal.classList.add('hidden');
 
-        sessionStorage.setItem(
-            'registrationNoticeSeen',
-            'true'
-        );
+            sessionStorage.setItem(
+                'registrationNoticeSeen',
+                'true'
+            );
+
+        });
 
     });
-
-});
 </script>
 @endsection
