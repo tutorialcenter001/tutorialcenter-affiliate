@@ -185,6 +185,82 @@
     </div>
 </section>
 
+<!-- Registration Notice Modal -->
+<div id="registrationNotice"
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
+
+    <div class="w-full max-w-lg rounded-3xl bg-white p-6 shadow-2xl dark:bg-slate-900">
+
+        <div class="mb-5 flex items-center gap-3">
+            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-yellow-100">
+                ⚠️
+            </div>
+
+            <div>
+                <h3 class="text-xl font-bold text-[#0b3a67] dark:text-white">
+                    Important Information
+                </h3>
+
+                <p class="text-sm text-gray-500 dark:text-slate-400">
+                    Please read before creating your account
+                </p>
+            </div>
+        </div>
+
+        <div class="space-y-4 text-sm leading-relaxed text-gray-700 dark:text-slate-300">
+
+            <div class="rounded-xl border border-yellow-200 bg-yellow-50 p-4 dark:border-yellow-700 dark:bg-yellow-950/30">
+                <p class="font-semibold text-yellow-700 dark:text-yellow-400">
+                    Bank Account Name
+                </p>
+
+                <p class="mt-2">
+                    Please ensure the <strong>First Name</strong> and
+                    <strong>Surname</strong> you register with exactly match
+                    the name on your bank account.
+                </p>
+
+                <p class="mt-2">
+                    Payments may fail or be delayed if the registered name is different from your bank account details.
+                </p>
+            </div>
+
+            <div class="rounded-xl border border-blue-200 bg-blue-50 p-4 dark:border-blue-700 dark:bg-blue-950/30">
+                <p class="font-semibold text-[#0b3a67] dark:text-blue-300">
+                    Referral Code
+                </p>
+
+                <p class="mt-2">
+                    Create a <strong>unique referral code</strong> for your account.
+                </p>
+
+                <p class="mt-2">
+                    Your referral code will be used to identify and track referrals associated with you.
+                </p>
+
+                <p class="mt-2">
+                    Example:
+                    <span class="font-semibold text-[#ed1c24]">
+                        johntech01
+                    </span>,
+                    <span class="font-semibold text-[#ed1c24]">
+                        maryacademy
+                    </span>
+                </p>
+            </div>
+
+        </div>
+
+        <button
+            id="closeRegistrationNotice"
+            class="mt-6 w-full rounded-xl bg-[#ed1c24] py-3 font-semibold text-white transition hover:opacity-90">
+
+            I Understand
+        </button>
+
+    </div>
+
+</div>
 
 <script>
     const registerForm = document.getElementById('registerForm');
@@ -393,5 +469,36 @@
             setLoading(false);
         }
     });
+
+    
+</script>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+
+    const modal = document.getElementById('registrationNotice');
+    const closeBtn = document.getElementById('closeRegistrationNotice');
+
+    if (!sessionStorage.getItem('registrationNoticeSeen')) {
+
+        modal.classList.remove('hidden');
+
+    } else {
+
+        modal.classList.add('hidden');
+    }
+
+    closeBtn.addEventListener('click', () => {
+
+        modal.classList.add('hidden');
+
+        sessionStorage.setItem(
+            'registrationNoticeSeen',
+            'true'
+        );
+
+    });
+
+});
 </script>
 @endsection
