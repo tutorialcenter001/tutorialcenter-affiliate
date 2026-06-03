@@ -158,6 +158,27 @@
                     </div>
                 </div>
 
+                <div class="mt-4">
+                    <label class="flex items-start gap-2">
+
+                        <input
+                            type="checkbox"
+                            name="terms"
+                            required
+                            class="mt-1">
+
+                        <span class="text-sm text-gray-600">
+                            I agree to the
+                            <a href="{{ route('terms') }}"
+                                target="_blank"
+                                class="font-semibold text-[#0b3a67] underline">
+                                Terms & Conditions
+                            </a>
+                        </span>
+
+                    </label>
+                </div>
+
                 <input type="hidden" name="role" value="affiliate">
                 <p class="mt-2 text-sm text-red-600" data-error="role"></p>
 

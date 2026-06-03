@@ -10,6 +10,11 @@ Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
 
+Route::view('/terms-and-conditions', 'terms-and-conditions')
+    ->name('terms');
+Route::view('/privacy-policy', 'privacy-policy')
+    ->name('privacy');
+
 // registration page
 Route::get('/register', function () {
     return view('auth.register');

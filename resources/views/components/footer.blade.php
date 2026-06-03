@@ -14,16 +14,19 @@
             <div>
                 <h3 class="font-semibold mb-4">Quick Links</h3>
                 <ul class="space-y-3 text-sm text-gray-200 dark:text-slate-400">
+                    <li><a href="{{ route('terms') }}" class="hover:text-[#ed1c24] transition">Terms and Conditions</a></li>
+                    <li><a href="{{ route('privacy') }}" class="hover:text-[#ed1c24] transition">Privacy Policy</a></li >
                     <li><a href="#how-it-works" class="hover:text-[#ed1c24] transition">How It Works</a></li>
                     <li><a href="#benefits" class="hover:text-[#ed1c24] transition">Benefits</a></li>
                     <li><a href="#faq" class="hover:text-[#ed1c24] transition">FAQ</a></li>
 
+
                     @if (Route::has('register'))
-                        <li><a href="{{ route('register') }}" class="hover:text-[#ed1c24] transition">Register</a></li>
+                    <li><a href="{{ route('register') }}" class="hover:text-[#ed1c24] transition">Register</a></li>
                     @endif
 
                     @if (Route::has('login'))
-                        <li><a href="{{ route('login') }}" class="hover:text-[#ed1c24] transition">Login</a></li>
+                    <li><a href="{{ route('login') }}" class="hover:text-[#ed1c24] transition">Login</a></li>
                     @endif
                 </ul>
             </div>
@@ -37,10 +40,10 @@
 
                 <div class="mt-5">
                     @if (Route::has('register'))
-                        <a href="{{ route('register') }}"
-                           class="inline-flex rounded-xl bg-[#ed1c24] px-5 py-3 text-sm font-semibold text-white hover:opacity-90 transition">
-                            Become an Affiliate
-                        </a>
+                    <a href="{{ route('register') }}"
+                        class="inline-flex rounded-xl bg-[#ed1c24] px-5 py-3 text-sm font-semibold text-white hover:opacity-90 transition">
+                        Become an Affiliate
+                    </a>
                     @endif
                 </div>
             </div>
