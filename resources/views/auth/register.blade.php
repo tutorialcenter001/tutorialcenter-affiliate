@@ -96,11 +96,52 @@
                     <p class="mt-2 text-sm text-red-600" data-error="phone_number"></p>
                 </div>
 
-                <div>
+                <!-- <div>
                     <label class="mb-2 block text-sm font-semibold text-[#0b3a67] dark:text-white">Referral Code</label>
                     <input type="text" name="referral_code" placeholder="Choose your referral code"
                         class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 outline-none focus:border-[#0b3a67] focus:ring-2 focus:ring-[#0b3a67]/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white">
                     <p class="mt-1 text-xs text-gray-500 dark:text-slate-400">Must be unique.</p>
+                    <p class="mt-2 text-sm text-red-600" data-error="referral_code"></p>
+                </div> -->
+
+                <div>
+                    <label class="mb-2 block text-sm font-semibold text-[#0b3a67] dark:text-white">
+                        Referral Code
+                    </label>
+
+                    <div class="relative">
+                        <input
+                            id="referralCodeInput"
+                            type="text"
+                            name="referral_code"
+                            placeholder="Choose your referral code"
+                            class="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 pr-14 outline-none focus:border-[#0b3a67] focus:ring-2 focus:ring-[#0b3a67]/20 dark:border-slate-700 dark:bg-slate-950 dark:text-white">
+
+                        <button
+                            type="button"
+                            id="generateReferralCode"
+                            title="Generate referral code"
+                            class="absolute inset-y-0 right-3 flex items-center text-[#0b3a67] transition hover:text-[#ed1c24] dark:text-slate-300">
+
+                            <!-- Magic Wand Icon -->
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                class="h-5 w-5"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor">
+
+                                <path stroke-linecap="round"
+                                    stroke-linejoin="round"
+                                    stroke-width="2"
+                                    d="M15 4V2m0 4V4m4 4h2m-6 0h2m-7.293 7.293l-1.414 1.414M6 18l1.414-1.414M18 18l-1.414-1.414M8.707 8.707L7.293 7.293M12 12l8 8M12 12L4 20" />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <p class="mt-1 text-xs text-gray-500 dark:text-slate-400">
+                        Must be unique. Click the icon to generate one automatically.
+                    </p>
+
                     <p class="mt-2 text-sm text-red-600" data-error="referral_code"></p>
                 </div>
 
@@ -519,5 +560,30 @@
         });
 
     });
+</script>
+
+<script>
+    document.getElementById('generateReferralCode')
+        ?.addEventListener('click', function() {
+
+            const firstname = document.querySelector('[name="firstname"]')?.value || '';
+            const surname = document.querySelector('[name="surname"]')?.value || '';
+
+            if (!firstname && !surname) {
+                alert('Please enter your first name or surname first.');
+                return;
+            }
+
+            // Generate base code
+            let code = (firstname + surname)
+                .toLowerCase()
+                .replace(/\s+/g, '')
+                .replace(/[^a-z0-9]/g, '');
+
+            // Add random suffix for uniqueness
+            code += Math.floor(Math.random() * 900 + 100);
+
+            document.getElementById('referralCodeInput').value = code;
+        });
 </script>
 @endsection
