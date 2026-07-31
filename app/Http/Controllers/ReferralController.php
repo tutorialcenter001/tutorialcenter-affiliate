@@ -26,7 +26,7 @@ class ReferralController extends Controller
             'referral_code' => 'required|string|exists:users,referral_code',
 
             // Optional earning data from main platform
-            // 'amount' => 'nullable|numeric|min:0',
+            'amount' => 'nullable|numeric|min:0',
             'description' => 'nullable|string|max:500',
         ]);
 
@@ -71,7 +71,7 @@ class ReferralController extends Controller
             }
 
             // $earningAmount = $request->amount ?? 0;
-            $earningAmount = 500;
+            $earningAmount = $request->amount ?? 0;
 
             $earning = null;
 
