@@ -22,7 +22,7 @@ class AdminSeeder extends Seeder
             'email' => 'tutorialcenter001@gmail.com',
             'email_verified_at' => now(),
             'password' => Hash::make('Qwertyuiop@1'),
-            'referral_code' => 'ADMIN001',
+            'referral_code' => 'tutorialcenter',
             'role' => 'admin',
             'profile_picture' => null,
             'phone_number' => '08029606405',
