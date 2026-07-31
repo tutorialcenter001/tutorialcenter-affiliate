@@ -22,18 +22,34 @@ class UserFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    // public function definition(): array
+    // {
+    //     return [
+    //         'firstname' => fake()->firstName(),
+    //         'surname' => fake()->lastName(),
+    //         'email' => fake()->unique()->safeEmail(),
+    //         'email_verified_at' => now(),
+    //         'password' => static::$password ??= Hash::make('password'),
+    //         'referral_code' => fake()->unique()->regexify('[A-Z0-9]{8}'),
+    //         'role' => fake()->randomElement(['affiliate', 'admin', 'user']),
+    //         'profile_picture' => null,
+    //         'phone_number' => fake()->phoneNumber(),
+    //         'remember_token' => Str::random(10),
+    //     ];
+    // }
+
     public function definition(): array
     {
         return [
-            'firstname' => fake()->firstName(),
-            'surname' => fake()->lastName(),
-            'email' => fake()->unique()->safeEmail(),
+            'firstname' => $this->faker->firstName(),
+            'surname' => $this->faker->lastName(),
+            'email' => $this->faker->unique()->safeEmail(),
             'email_verified_at' => now(),
             'password' => static::$password ??= Hash::make('password'),
-            'referral_code' => fake()->unique()->regexify('[A-Z0-9]{8}'),
-            'role' => fake()->randomElement(['affiliate', 'admin', 'user']),
+            'referral_code' => $this->faker->unique()->regexify('[A-Z0-9]{8}'),
+            'role' => $this->faker->randomElement(['affiliate', 'admin', 'user']),
             'profile_picture' => null,
-            'phone_number' => fake()->phoneNumber(),
+            'phone_number' => $this->faker->phoneNumber(),
             'remember_token' => Str::random(10),
         ];
     }
@@ -43,7 +59,7 @@ class UserFactory extends Factory
      */
     public function unverified(): static
     {
-        return $this->state(fn (array $attributes) => [
+        return $this->state(fn(array $attributes) => [
             'email_verified_at' => null,
         ]);
     }
