@@ -90,7 +90,7 @@
                         title="https://www.tutorialcenter.africa?ref={{ $user->referral_code }}"
                         class="min-w-0 break-all font-bold text-[#ed1c24]"
                     >
-                        https://www.tutorialcenter.africa?ref={{ $user->referral_code }}
+                        www.tutorialcenter.africa?ref={{ $user->referral_code }}
                         <!-- {{ $user->referral_code }} -->
 
                     </span>
